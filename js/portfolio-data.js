@@ -45,7 +45,7 @@ window.portfolioData = {
   // -------------------------------------------------------------------------
   analytics: {
     enabled: true,
-    measurementId: "",
+    measurementId: "G-F2YEZ57Z6T",
     trackCvDownloads: true,
     trackEmailClicks: true,
     trackPublicationClicks: true,
