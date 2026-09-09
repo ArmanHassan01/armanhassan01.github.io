@@ -167,8 +167,34 @@
     if (d.analytics.trackSocialClicks && window.trackPortfolioEvent) window.trackPortfolioEvent('social_click', { platform: a.dataset.social });
   }));
 
-  const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Subtle, staggered entrance animation for sections and cards.
+  const revealItems = [...document.querySelectorAll('.reveal')];
+  revealItems.forEach((el, index) => {
+    // Keep delays short so the page never feels slow. Reset every four items.
+    el.style.setProperty('--reveal-delay', `${(index % 4) * 70}ms`);
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
+  revealItems.forEach(el => observer.observe(el));
+
+  // Animate the academic-stat strip once after the first paint.
+  document.querySelectorAll('.stat').forEach((el, index) => {
+    el.style.setProperty('--stat-delay', `${100 + index * 65}ms`);
+  });
+  requestAnimationFrame(() => requestAnimationFrame(() => $('#stats').classList.add('stats-ready')));
+
+  // Add a very light shadow to the navigation only after scrolling.
+  const nav = document.querySelector('.nav');
+  const updateNav = () => nav.classList.toggle('nav-scrolled', window.scrollY > 18);
+  updateNav();
+  window.addEventListener('scroll', updateNav, { passive: true });
 
   const toggle = $('#menu-toggle');
   const menu = $('#nav-links');
