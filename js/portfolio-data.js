@@ -22,7 +22,7 @@ window.portfolioData = {
     description: "Mechanical Engineering graduate from BUET researching molecular dynamics, thermal transport, polymer nanocomposites, programmable structures, and robotics.",
     phdCycle: "Fall 2027",
     featuredResearch: ["pdms-hbn", "mof-diffusion", "stanene-hbn"],
-    featuredProjects: ["prosthetic-wrist", "rover-arm", "cycloidal-gearbox", "differential-wrist", "traffic-signal"],
+    featuredProjects: ["prosthetic-wrist", "interplanetar", "traffic-signal", "suspension-fea"],
     sections: {
       researchInterests: true,
       research: true,
@@ -131,6 +131,20 @@ window.portfolioData = {
       tags: ["Polymer Nanocomposites", "Thermal Transport", "hBN", "Graphene", "Molecular Dynamics"],
       image: "images/research/pdms-hbn.svg",
       imageAlt: "Placeholder for PDMS-hBN molecular structure or thermal transport result",
+      gallery: [
+        { src: "images/research/pdms-hbn.svg", alt: "PDMS-hBN research placeholder", caption: "Replace this placeholder with your molecular structure, temperature profile, or thermal-conductivity figure." }
+      ],
+      videos: [],
+      links: [],
+      detail: {
+        question: "How do filler architecture and composition influence thermal transport in PDMS-based nanocomposites?",
+        approach: "Molecular dynamics simulations were used to evaluate thermal transport in PDMS with aligned hBN fillers and to extend the study toward carbon-doped hBN and graphene/hBN heterostructured fillers.",
+        contribution: "Built and analyzed polymer–filler simulation systems, carried out thermal-transport simulations, and performed post-processing and physical interpretation of the resulting conductivity trends.",
+        highlights: ["PDMS–hBN nanocomposites", "Aligned filler architectures", "Doped hBN and graphene/hBN extensions", "LAMMPS-based molecular simulation"],
+        sections: [
+          { title: "What to add here", text: "This detail page is designed for your actual simulation snapshots, temperature profiles, conductivity plots, interface-geometry figures, and manuscript or thesis links. Replace the placeholder visual as you prepare the final professor-facing version." }
+        ]
+      },
       link: ""
     },
     {
@@ -145,6 +159,18 @@ window.portfolioData = {
       tags: ["MOF", "CO₂ Capture", "Gas Diffusion", "Molecular Dynamics"],
       image: "images/research/mof.svg",
       imageAlt: "Placeholder for MOF structure or diffusion visualization",
+      gallery: [
+        { src: "images/research/mof.svg", alt: "MOF diffusion research placeholder", caption: "Replace with your MOF structure or CO₂/N₂ diffusion visualization." }
+      ],
+      videos: [],
+      links: [],
+      detail: {
+        question: "How does co-adsorbed N₂ alter CO₂ self-diffusion inside different MOF pore environments?",
+        approach: "Molecular dynamics simulations compare CO₂ mobility under N₂ co-adsorption in tight- and open-pore frameworks, with diffusion analysis aimed at quantifying slowdown relevant to separation and carbon-capture applications.",
+        contribution: "Research work includes studying the physical and chemical basis of CO₂ diffusion in MOFs, reviewing prior work, and supporting interpretation of the molecular-dynamics study.",
+        highlights: ["CO₂ self-diffusivity", "N₂ co-adsorption", "Tight vs open pores", "Carbon capture and gas separation"],
+        sections: []
+      },
       link: ""
     },
     {
@@ -159,6 +185,18 @@ window.portfolioData = {
       tags: ["Stanene", "hBN", "2D Materials", "Thermal Transport", "Phonons"],
       image: "images/research/stanene-hbn.svg",
       imageAlt: "Placeholder for doped stanene-hBN heterobilayer or PDOS figure",
+      gallery: [
+        { src: "images/research/stanene-hbn.svg", alt: "Stanene-hBN research placeholder", caption: "Replace with the heterobilayer structure, thermal-conductivity results, or PDOS figure." }
+      ],
+      videos: [],
+      links: [],
+      detail: {
+        question: "How does substitutional doping modify thermal transport across a stanene/hBN van der Waals heterobilayer?",
+        approach: "LAMMPS-based molecular dynamics is used to compare thermal conductivity across doped configurations, while phonon density-of-states analysis examines changes in spectral overlap and interfacial phonon coupling.",
+        contribution: "The study combines atomistic thermal-transport simulation with phonon-spectrum analysis to investigate how doping changes interfacial transport behavior.",
+        highlights: ["Stanene/hBN heterobilayer", "Substitutional doping", "Thermal conductivity", "PDOS and spectral overlap"],
+        sections: []
+      },
       link: ""
     }
   ],
@@ -209,35 +247,109 @@ window.portfolioData = {
       role: "Research & Development",
       description: "Developed a low-cost myoelectric prosthetic wrist using 3D-printed ABS components and flexible TPU fingers. The finger architecture incorporated living-hinge behavior and material flexibility to provide adaptive grasping without conventional articulated finger joints.",
       tags: ["Compliant Mechanisms", "TPU", "Soft Robotics", "3D Printing", "EMG"],
-      image: "images/projects/prosthetic/grasp.png"
+      image: "images/projects/prosthetic/grasp.png",
+      gallery: [
+        { src: "images/projects/prosthetic/grasp.png", alt: "Adaptive grasp demonstration", caption: "Adaptive grasp demonstration of the prosthetic wrist." },
+        { src: "images/projects/prosthetic/prototype.png", alt: "Prosthetic wrist prototype and design", caption: "Prototype and mechanical design view." }
+      ],
+      videos: [],
+      links: [
+        { label: "Publication DOI", url: "https://doi.org/10.2991/978-94-6463-884-4_72" }
+      ],
+      detail: {
+        question: "How can a low-cost prosthetic wrist achieve adaptive grasping with simple, manufacturable mechanical architecture?",
+        approach: "The design combines 3D-printed structural components with flexible TPU fingers and living-hinge behavior, using material compliance to reduce dependence on conventional articulated finger joints.",
+        contribution: "Contributed to the mechanical development of the prosthetic wrist, including compliant TPU finger structures and the overall prototype system, alongside EMG-based grasp-control development.",
+        highlights: ["Flexible TPU fingers", "Living-hinge behavior", "Adaptive grasping", "Low-cost additive manufacturing"],
+        sections: [
+          { title: "Why it matters for my research direction", text: "This project is an early example in my work of using material flexibility and structural geometry to create useful mechanical behavior, which directly connects to my interest in compliant systems, programmable structures, and material-enabled robotics." }
+        ]
+      }
     },
+
+    // -----------------------------------------------------------------------
+    // TEAM INTERPLANETAR
+    // Keep the rover work together as ONE top-level project.
+    // Add or edit rover subsystems inside "subprojects".
+    // -----------------------------------------------------------------------
     {
-      id: "rover-arm",
-      title: "Mars Rover Robotic Arm",
-      category: "Robotic Manipulation · Mechanism Design",
+      id: "interplanetar",
+      title: "Team Interplanetar — Mars Rover Mechanical Systems",
+      category: "Planetary Robotics · Mechanical R&D",
       role: "Mechanical Subteam Lead & R&D Lead",
-      description: "Led R&D and redesign activities for rover mechanical systems, including robotic arm architecture, actuator packaging, mechanism development, and design decisions constrained by locally available components and manufacturing capability.",
-      tags: ["Robotic Manipulation", "Mechanism Design", "SolidWorks", "Actuation"],
-      image: "images/projects/rover-arm/arm.png"
+      description: "Led mechanical R&D and redesign activities for Team Interplanetar's planetary rover systems, covering robotic manipulation, compact actuation, transmission mechanisms, end-effector development, manufacturability, and integration around locally available components.",
+      tags: ["Planetary Robotics", "Robotic Manipulation", "Mechanism Design", "Actuation", "R&D Leadership"],
+      image: "images/projects/rover-arm/arm.png",
+      gallery: [
+        { src: "images/projects/rover-arm/arm.png", alt: "Mars rover robotic arm", caption: "Robotic arm development for Team Interplanetar." },
+        { src: "images/projects/cycloidal/cycloidal-1.png", alt: "Cycloidal gearbox CAD", caption: "Cycloidal gearbox R&D." },
+        { src: "images/projects/differential-wrist/wrist.png", alt: "Differential wrist mechanism", caption: "Differential wrist mechanism R&D." },
+        { src: "images/projects/gripper/gripper-1.png", alt: "Rover gripper mechanism", caption: "Rover gripper development." }
+      ],
+      videos: [],
+      links: [
+        { label: "Rover Publication DOI", url: "https://doi.org/10.2139/ssrn.6202378" }
+      ],
+      detail: {
+        question: "How can a competition-level planetary rover's mechanical systems be redesigned for reliable manipulation, compact actuation, manufacturability, and integration using practical local resources?",
+        approach: "The work combined subsystem-level R&D with system integration. Robotic-arm architecture, transmission concepts, wrist mechanisms, and gripper actuation were iterated in CAD with attention to actuator availability, packaging, assembly, manufacturing constraints, and overall rover functionality.",
+        contribution: "Led mechanical-subteam R&D and guided subsystem development, design reviews, feasibility decisions, and mechanical integration across several rover mechanisms.",
+        highlights: ["Mechanical Subteam Lead", "R&D Lead", "Robotic manipulation", "Actuation and transmissions", "Design for local manufacture"],
+        sections: [
+          { title: "Program-level role", text: "Rather than treating each mechanism as an unrelated project, this case study groups the rover work under Team Interplanetar. The individual R&D efforts below represent subsystems developed within the larger planetary-rover program." }
+        ]
+      },
+
+      subprojects: [
+        {
+          id: "rover-arm",
+          title: "Robotic Arm Redesign",
+          role: "Mechanical Subteam Lead & R&D Lead",
+          description: "Redesigned the rover arm actuation and mechanical architecture around locally available high-torque components, comparing actuator placement and mechanism layouts with attention to manufacturability, packaging, reliability, and simpler integrated robotic operation.",
+          tags: ["Robotic Manipulation", "Mechanism Design", "Actuator Packaging", "SolidWorks"],
+          gallery: [
+            { src: "images/projects/rover-arm/arm.png", alt: "Mars rover robotic arm", caption: "Robotic arm design and development work for Team Interplanetar." }
+          ],
+          videos: []
+        },
+        {
+          id: "cycloidal-gearbox",
+          title: "Cycloidal Gearbox Development",
+          role: "R&D Lead",
+          description: "Led in-house R&D for a compact cycloidal gearbox concept for rover actuation, reviewing architecture, CAD iterations, assembly, mechanical feasibility, and manufacturability.",
+          tags: ["Cycloidal Drive", "Transmission Design", "Compact Actuation", "DFMA"],
+          gallery: [
+            { src: "images/projects/cycloidal/cycloidal-1.png", alt: "Cycloidal gearbox CAD", caption: "Cycloidal gearbox CAD concept." },
+            { src: "images/projects/cycloidal/cycloidal-2.png", alt: "Cycloidal gearbox alternate view", caption: "Additional gearbox design view." }
+          ],
+          videos: []
+        },
+        {
+          id: "differential-wrist",
+          title: "Differential Wrist Development",
+          role: "R&D Lead",
+          description: "Led R&D of a differential wrist mechanism for rover end-effector orientation, guiding gear-layout decisions, actuator packaging, assembly fit, and mechanical feasibility.",
+          tags: ["Differential Mechanism", "Robotic Wrist", "Gear Layout", "Actuator Packaging"],
+          gallery: [
+            { src: "images/projects/differential-wrist/wrist.png", alt: "Differential wrist mechanism", caption: "Differential wrist mechanism CAD." }
+          ],
+          videos: []
+        },
+        {
+          id: "gripper",
+          title: "Gripper Development",
+          role: "R&D Lead",
+          description: "Led redesign of the rover gripper actuation mechanism to achieve faster operation while remaining compatible with available actuators, compact packaging requirements, and fabrication constraints.",
+          tags: ["End Effector", "Gripper", "Actuation", "Mechanism Design"],
+          gallery: [
+            { src: "images/projects/gripper/gripper-1.png", alt: "Rover gripper mechanism", caption: "Rover gripper development view." },
+            { src: "images/projects/gripper/gripper-2.png", alt: "Rover gripper alternate view", caption: "Additional gripper design view." }
+          ],
+          videos: []
+        }
+      ]
     },
-    {
-      id: "cycloidal-gearbox",
-      title: "Cycloidal Gearbox Development",
-      category: "Transmission Design · Robotics",
-      role: "R&D Lead",
-      description: "Led in-house R&D for a compact cycloidal gearbox concept for rover actuation, reviewing architecture, CAD iterations, assembly, mechanical feasibility, and manufacturability.",
-      tags: ["Cycloidal Drive", "Transmission Design", "Actuation", "Robotics"],
-      image: "images/projects/cycloidal/cycloidal-1.png"
-    },
-    {
-      id: "differential-wrist",
-      title: "Differential Wrist Development",
-      category: "Mechanism Design · Robotic Wrist",
-      role: "R&D Lead",
-      description: "Led R&D of a differential wrist mechanism for rover end-effector orientation, guiding gear-layout decisions, actuator packaging, assembly fit, and mechanical feasibility.",
-      tags: ["Differential Mechanism", "Robotic Wrist", "Actuation", "Mechanical Design"],
-      image: "images/projects/differential-wrist/wrist.png"
-    },
+
     {
       id: "traffic-signal",
       title: "Intelligent Traffic Signal Controller Enclosure",
@@ -245,7 +357,23 @@ window.portfolioData = {
       role: "Junior Mechanical Engineer",
       description: "Design mechanical components, mounting systems, and IP65 enclosures for traffic signal controllers and associated electronics, considering environmental protection, serviceability, manufacturability, assembly, and electrical integration.",
       tags: ["Sheet Metal", "IP65", "Electronics Packaging", "DFM", "SolidWorks"],
-      image: "images/projects/traffic-signal/enclosure.png"
+      image: "images/projects/traffic-signal/enclosure.png",
+      gallery: [
+        { src: "images/projects/traffic-signal/enclosure.png", alt: "Traffic signal controller enclosure", caption: "Controller enclosure design." },
+        { src: "images/projects/traffic-signal/assembly.png", alt: "Traffic signal controller assembly", caption: "Enclosure assembly view." },
+        { src: "images/projects/traffic-signal/layout.png", alt: "Internal equipment layout", caption: "Internal relay, controller, mounting, and wiring-space layout." }
+      ],
+      videos: [],
+      links: [],
+      detail: {
+        question: "How can outdoor controller hardware be packaged for environmental protection, serviceability, electrical integration, and manufacturability?",
+        approach: "Mechanical components, mounting systems, internal layouts, and enclosure features are developed as fabrication-ready designs for sheet metal, additive manufacturing, and other production processes.",
+        contribution: "Design mechanical components and IP65-oriented enclosure systems, develop fabrication-ready CAD, and coordinate mechanical implementation with the multidisciplinary project team.",
+        highlights: ["Outdoor enclosure design", "Electronics packaging", "Sheet metal", "Serviceability and DFM"],
+        sections: [
+          { title: "Public portfolio note", text: "Only publish images and technical details that you are permitted to share publicly. Internal or confidential project information should remain outside this portfolio." }
+        ]
+      }
     },
     {
       id: "suspension-fea",
@@ -254,7 +382,20 @@ window.portfolioData = {
       role: "Academic Project",
       description: "Performed structural analysis under combined braking, cornering, and vertical loading, evaluating total deformation, equivalent stress, and factor of safety using ANSYS Mechanical.",
       tags: ["ANSYS Mechanical", "FEA", "Suspension", "Structural Analysis"],
-      image: "images/projects/suspension/fea-1.png"
+      image: "images/projects/suspension/fea-1.png",
+      gallery: [
+        { src: "images/projects/suspension/fea-1.png", alt: "Suspension structural analysis result", caption: "ANSYS structural-analysis result." },
+        { src: "images/projects/suspension/fea-2.png", alt: "Suspension factor-of-safety result", caption: "Additional structural / factor-of-safety result." }
+      ],
+      videos: [],
+      links: [],
+      detail: {
+        question: "Where are the critical stress and deformation regions of a double-wishbone suspension under combined vehicle loading?",
+        approach: "Combined braking, cornering, and vertical loads were applied in ANSYS Mechanical, with total deformation, equivalent stress, and factor of safety evaluated and compared with analytical considerations.",
+        contribution: "Built the structural-analysis setup, evaluated critical regions, and interpreted the stress, deformation, and safety-factor results.",
+        highlights: ["Combined loading", "Equivalent stress", "Total deformation", "Factor of safety"],
+        sections: []
+      }
     }
   ],
 

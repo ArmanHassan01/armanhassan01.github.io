@@ -8,13 +8,10 @@
 
   const $ = (sel) => document.querySelector(sel);
   const esc = (value = '') => String(value).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const tags = (items = []) => items.map(x => `<span class="tag">${esc(x)}</span>`).join('');
-  const linkOrHash = (x) => x || '#';
+  const tags = (items = [], limit) => (limit ? items.slice(0, limit) : items).map(x => `<span class="tag">${esc(x)}</span>`).join('');
 
   function socialLinks() {
-    const icons = {
-      linkedin: 'in', googleScholar: 'G', github: '&lt;/&gt;', orcid: 'iD'
-    };
+    const icons = { linkedin: 'in', googleScholar: 'G', github: '&lt;/&gt;', orcid: 'iD' };
     return Object.entries(d.links)
       .filter(([, url]) => url)
       .map(([key, url]) => `<a class="social-link" href="${esc(url)}" target="_blank" rel="noreferrer" data-social="${esc(key)}" aria-label="${esc(key)}">${icons[key] || esc(key)}</a>`)
@@ -54,29 +51,27 @@
           <p class="micro-label">${esc(r.label)}</p>
           <h3>${esc(r.title)}</h3>
           <p>${esc(r.description)}</p>
-          <div class="tag-row">${tags(r.topics)}</div>
+          <div class="tag-row">${tags(r.topics, 6)}</div>
         </article>`).join('')}</div>`;
   }
 
   const researchOrder = d.site.featuredResearch.map(id => d.researchProjects.find(x => x.id === id)).filter(Boolean);
   if (d.site.sections.research) {
     $('#research').innerHTML = `
-      <div class="section-head reveal"><span class="section-index">02</span><div><p class="eyebrow">Selected work</p><h2>Featured Research</h2><p>Current and completed research in molecular simulation, thermal transport, advanced materials, and nanoscale systems.</p></div></div>
-      <div class="research-list">${researchOrder.map((r, i) => `
-        <article class="research-card reveal" data-research-id="${esc(r.id)}">
-          <div class="research-image-wrap"><img src="${esc(r.image)}" alt="${esc(r.imageAlt)}" class="research-image"></div>
-          <div class="research-content">
+      <div class="section-head reveal"><span class="section-index">02</span><div><p class="eyebrow">Selected work</p><h2>Featured Research</h2><p>Scan the overview here, then open any case study for methodology, figures, results, and additional material.</p></div></div>
+      <div class="research-grid-compact">${researchOrder.map(r => `
+        <a class="research-card-compact reveal" href="research.html?id=${encodeURIComponent(r.id)}" data-research-id="${esc(r.id)}">
+          <div class="research-card-media"><img src="${esc(r.image)}" alt="${esc(r.imageAlt || r.title)}"></div>
+          <div class="research-card-body">
             <div class="project-meta"><span>${esc(r.type)}</span><span class="status-dot"></span><span>${esc(r.status)}</span></div>
             <h3>${esc(r.title)}</h3>
-            <p class="institution">${esc(r.institution)}</p>
-            ${r.supervisor ? `<p class="supervisor">${esc(r.supervisor)}</p>` : ''}
             <p>${esc(r.summary)}</p>
-            <div class="tag-row">${tags(r.tags)}</div>
-            <div class="method-line"><strong>Methods</strong><span>${esc(r.methods.join(' · '))}</span></div>
+            <div class="tag-row">${tags(r.tags, 4)}</div>
+            <span class="explore-link">Explore research <b>→</b></span>
           </div>
-        </article>`).join('')}</div>
+        </a>`).join('')}</div>
       <div class="workflow reveal">
-        ${['Atomic Structure','Force Field / Validation','Equilibration','Molecular Dynamics','Thermal / Diffusion Analysis','Post-processing','Physical Interpretation'].map((x, i, arr) => `<div class="workflow-step"><span>${String(i+1).padStart(2,'0')}</span><strong>${x}</strong></div>${i < arr.length-1 ? '<div class="workflow-arrow">→</div>' : ''}`).join('')}
+        ${['Atomic Structure','Force Field / Validation','Equilibration','Molecular Dynamics','Analysis','Post-processing','Interpretation'].map((x, i, arr) => `<div class="workflow-step"><span>${String(i+1).padStart(2,'0')}</span><strong>${x}</strong></div>${i < arr.length-1 ? '<div class="workflow-arrow">→</div>' : ''}`).join('')}
       </div>`;
   }
 
@@ -104,18 +99,18 @@
   const projects = [...projectOrder, ...remaining];
   if (d.site.sections.projects) {
     $('#projects').innerHTML = `
-      <div class="section-head reveal"><span class="section-index">04</span><div><p class="eyebrow">Mechanical systems</p><h2>Selected Engineering Projects</h2><p>Mechanical design, prototyping, and robotic-system experience supporting my interests in mechanisms, adaptive structures, and material-enabled robotics.</p></div></div>
-      <div class="project-grid">${projects.map((p, i) => `
-        <article class="project-card reveal ${i === 0 ? 'project-featured' : ''}" data-project-id="${esc(p.id)}">
+      <div class="section-head reveal"><span class="section-index">04</span><div><p class="eyebrow">Mechanical systems</p><h2>Selected Engineering Projects</h2><p>Click a project to open its CAD, prototype photos, videos, design decisions, and supporting details.</p></div></div>
+      <div class="project-grid compact-project-grid">${projects.map(p => `
+        <a class="project-card project-card-link reveal" href="project.html?id=${encodeURIComponent(p.id)}" data-project-id="${esc(p.id)}">
           <div class="project-image-wrap"><img src="${esc(p.image)}" alt="${esc(p.title)}" class="project-image"></div>
-          <div class="project-body"><p class="micro-label">${esc(p.category)}</p><h3>${esc(p.title)}</h3><p class="role">${esc(p.role)}</p><p>${esc(p.description)}</p><div class="tag-row">${tags(p.tags)}</div></div>
-        </article>`).join('')}</div>`;
+          <div class="project-body"><p class="micro-label">${esc(p.category)}</p><h3>${esc(p.title)}</h3><p class="role">${esc(p.role)}</p><p class="project-summary">${esc(p.description)}</p><div class="tag-row">${tags(p.tags, 3)}</div><span class="explore-link">Explore project <b>→</b></span></div>
+        </a>`).join('')}</div>`;
   }
 
   if (d.site.sections.experience) {
     $('#experience').innerHTML = `
       <div class="section-head reveal"><span class="section-index">05</span><div><p class="eyebrow">Experience</p><h2>Professional & Engineering Leadership</h2></div></div>
-      <div class="experience-grid">
+      <div class="experience-grid compact-experience">
         <div><h3 class="experience-label">Professional Experience</h3>${d.professionalExperience.map(e => `<article class="timeline-item reveal"><span class="timeline-dot"></span><div><p class="period">${esc(e.period)}</p><h3>${esc(e.role)}</h3><p class="institution">${esc(e.organization)}</p><p>${esc(e.description)}</p></div></article>`).join('')}</div>
         <div><h3 class="experience-label">Engineering Leadership</h3>${d.leadershipExperience.map(e => `<article class="timeline-item reveal"><span class="timeline-dot"></span><div><p class="period">${esc(e.period)}</p><h3>${esc(e.role)}</h3><p class="institution">${esc(e.organization)}</p><p>${esc(e.description)}</p></div></article>`).join('')}</div>
       </div>
@@ -124,8 +119,8 @@
 
   if (d.site.sections.skills) {
     $('#skills').innerHTML = `
-      <div class="section-head reveal"><span class="section-index">06</span><div><p class="eyebrow">Capabilities</p><h2>Technical Toolkit</h2><p>No percentage bars — just the tools and methods I actually use.</p></div></div>
-      <div class="skills-grid">${Object.entries(d.skills).map(([name, items]) => `<article class="skill-card reveal"><h3>${esc(name)}</h3><div class="skill-list">${items.map(x => `<span>${esc(x)}</span>`).join('')}</div></article>`).join('')}</div>`;
+      <div class="section-head reveal compact-heading"><span class="section-index">06</span><div><p class="eyebrow">Capabilities</p><h2>Technical Toolkit</h2></div></div>
+      <div class="skills-grid compact-skills">${Object.entries(d.skills).map(([name, items]) => `<article class="skill-card reveal"><h3>${esc(name)}</h3><div class="skill-list">${items.map(x => `<span>${esc(x)}</span>`).join('')}</div></article>`).join('')}</div>`;
   }
 
   if (d.site.sections.honors) {
@@ -157,23 +152,18 @@
   }));
   document.querySelectorAll('[data-research-id]').forEach(a => a.addEventListener('click', () => {
     const r = d.researchProjects.find(x => x.id === a.dataset.researchId);
-    if (r && d.analytics.trackProjectViews && window.trackPortfolioEvent) window.trackPortfolioEvent('research_project_view', { project_slug: r.id, project_title: r.title });
+    if (r && d.analytics.trackProjectViews && window.trackPortfolioEvent) window.trackPortfolioEvent('research_project_click', { project_slug: r.id, project_title: r.title });
   }));
   document.querySelectorAll('[data-project-id]').forEach(a => a.addEventListener('click', () => {
     const p = d.engineeringProjects.find(x => x.id === a.dataset.projectId);
-    if (p && d.analytics.trackProjectViews && window.trackPortfolioEvent) window.trackPortfolioEvent('engineering_project_view', { project_slug: p.id, project_title: p.title });
+    if (p && d.analytics.trackProjectViews && window.trackPortfolioEvent) window.trackPortfolioEvent('engineering_project_click', { project_slug: p.id, project_title: p.title });
   }));
   document.querySelectorAll('[data-social]').forEach(a => a.addEventListener('click', () => {
     if (d.analytics.trackSocialClicks && window.trackPortfolioEvent) window.trackPortfolioEvent('social_click', { platform: a.dataset.social });
   }));
 
-  // Subtle, staggered entrance animation for sections and cards.
   const revealItems = [...document.querySelectorAll('.reveal')];
-  revealItems.forEach((el, index) => {
-    // Keep delays short so the page never feels slow. Reset every four items.
-    el.style.setProperty('--reveal-delay', `${(index % 4) * 70}ms`);
-  });
-
+  revealItems.forEach((el, index) => el.style.setProperty('--reveal-delay', `${(index % 4) * 70}ms`));
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -184,13 +174,9 @@
   }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
   revealItems.forEach(el => observer.observe(el));
 
-  // Animate the academic-stat strip once after the first paint.
-  document.querySelectorAll('.stat').forEach((el, index) => {
-    el.style.setProperty('--stat-delay', `${100 + index * 65}ms`);
-  });
+  document.querySelectorAll('.stat').forEach((el, index) => el.style.setProperty('--stat-delay', `${100 + index * 65}ms`));
   requestAnimationFrame(() => requestAnimationFrame(() => $('#stats').classList.add('stats-ready')));
 
-  // Add a very light shadow to the navigation only after scrolling.
   const nav = document.querySelector('.nav');
   const updateNav = () => nav.classList.toggle('nav-scrolled', window.scrollY > 18);
   updateNav();
@@ -200,4 +186,172 @@
   const menu = $('#nav-links');
   toggle.addEventListener('click', () => { menu.classList.toggle('open'); toggle.setAttribute('aria-expanded', menu.classList.contains('open')); });
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+})();
+
+
+/* ==========================================================
+   INTERMEDIATE MOTION LAYER
+   Polished interaction without turning the academic portfolio
+   into a flashy marketing site.
+   ========================================================== */
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  /* Reading progress */
+  const progress = document.createElement('div');
+  progress.className = 'scroll-progress';
+  progress.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(progress);
+
+  const updateProgress = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+    progress.style.transform = `scaleX(${ratio})`;
+  };
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  /* Active navigation section */
+  const navLinks = [...document.querySelectorAll('#nav-links a[href^="#"]')];
+  const sectionMap = navLinks
+    .map(link => {
+      const target = document.querySelector(link.getAttribute('href'));
+      return target ? { link, target } : null;
+    })
+    .filter(Boolean);
+
+  if (sectionMap.length) {
+    const activeObserver = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+      navLinks.forEach(link => link.classList.remove('active'));
+      const match = sectionMap.find(item => item.target === visible.target);
+      if (match) match.link.classList.add('active');
+    }, {
+      rootMargin: '-25% 0px -60% 0px',
+      threshold: [0.01, 0.15, 0.35]
+    });
+
+    sectionMap.forEach(item => activeObserver.observe(item.target));
+  }
+
+  /* Count-up for the numeric part of academic stats */
+  const animateStat = (el, delay = 0) => {
+    const original = el.textContent.trim();
+    const match = original.match(/^(\d+(?:\.\d+)?)(.*)$/);
+    if (!match) return;
+
+    const target = Number(match[1]);
+    const suffix = match[2];
+    const decimals = (match[1].split('.')[1] || '').length;
+    const duration = 850;
+
+    setTimeout(() => {
+      const started = performance.now();
+      const tick = now => {
+        const p = Math.min(1, (now - started) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const value = target * eased;
+        el.textContent = `${value.toFixed(decimals)}${suffix}`;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = original;
+      };
+      requestAnimationFrame(tick);
+    }, delay);
+  };
+
+  const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting || entry.target.dataset.counted) return;
+      entry.target.dataset.counted = 'true';
+      const strong = entry.target.querySelector('strong');
+      if (strong) animateStat(strong, Number(entry.target.dataset.statIndex || 0) * 90);
+    });
+  }, { threshold: 0.55 });
+
+  document.querySelectorAll('.stat').forEach((stat, i) => {
+    stat.dataset.statIndex = i;
+    statsObserver.observe(stat);
+  });
+
+  /* Slight cursor-follow parallax in hero only */
+  const portraitShell = document.querySelector('.portrait-shell');
+  if (portraitShell && window.matchMedia('(pointer:fine)').matches) {
+    const portrait = portraitShell.querySelector('.portrait');
+    const latticeA = portraitShell.querySelector('.lattice-a');
+    const latticeB = portraitShell.querySelector('.lattice-b');
+    const caption = portraitShell.querySelector('.portrait-caption');
+
+    portraitShell.addEventListener('pointermove', e => {
+      const r = portraitShell.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+
+      if (portrait) portrait.style.transform = `translate3d(${x * 5}px, ${y * 5}px, 0) scale(1.006)`;
+      if (latticeA) latticeA.style.translate = `${x * 12}px ${y * 12}px`;
+      if (latticeB) latticeB.style.translate = `${x * -9}px ${y * -9}px`;
+      if (caption) caption.style.transform = `translate3d(${x * -4}px, ${y * -3}px, 0)`;
+    });
+
+    portraitShell.addEventListener('pointerleave', () => {
+      if (portrait) portrait.style.transform = '';
+      if (latticeA) latticeA.style.translate = '';
+      if (latticeB) latticeB.style.translate = '';
+      if (caption) caption.style.transform = '';
+    });
+  }
+
+  /* Subtle cursor light on clickable/important cards */
+  const interactiveCards = document.querySelectorAll(
+    '.interest-card, .research-card-compact, .project-card-link, .publication, .skill-card'
+  );
+
+  if (window.matchMedia('(pointer:fine)').matches) {
+    interactiveCards.forEach(card => {
+      card.classList.add('interactive-surface');
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--pointer-x', `${e.clientX - r.left}px`);
+        card.style.setProperty('--pointer-y', `${e.clientY - r.top}px`);
+      });
+    });
+  }
+
+  /* Slightly stagger items within the same grid */
+  [
+    '.interest-grid',
+    '.research-grid-compact',
+    '.project-grid',
+    '.skills-grid',
+    '.publication-list'
+  ].forEach(selector => {
+    const parent = document.querySelector(selector);
+    if (!parent) return;
+    [...parent.children].forEach((child, i) => {
+      child.style.setProperty('--group-delay', `${Math.min(i, 5) * 55}ms`);
+      child.classList.add('group-stagger');
+    });
+  });
+
+  /* Short exit transition before opening a case study */
+  document.querySelectorAll(
+    'a[href^="project.html?id="], a[href^="research.html?id="]'
+  ).forEach(link => {
+    link.addEventListener('click', e => {
+      if (
+        e.defaultPrevented ||
+        e.button !== 0 ||
+        e.metaKey || e.ctrlKey || e.shiftKey || e.altKey
+      ) return;
+
+      e.preventDefault();
+      document.body.classList.add('page-leaving');
+      const href = link.href;
+      setTimeout(() => { window.location.href = href; }, 155);
+    });
+  });
 })();
