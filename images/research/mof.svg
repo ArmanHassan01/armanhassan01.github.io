@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#10263d"/><stop offset="1" stop-color="#164e63"/></linearGradient></defs>
+  <rect width="1200" height="760" fill="url(#g)"/>
+  <g stroke="#8be9fd" stroke-opacity=".35" fill="none" stroke-width="3">
+    <circle cx="200" cy="180" r="80"/><circle cx="430" cy="290" r="110"/><circle cx="720" cy="180" r="90"/><circle cx="930" cy="330" r="125"/><circle cx="610" cy="500" r="100"/>
+    <path d="M270 215L330 250M540 270L630 210M810 225L840 260M520 390L560 420M785 410L690 470"/>
+  </g>
+  <g fill="#e7fbff" font-family="Arial, sans-serif">
+    <text x="72" y="610" font-size="44" font-weight="700">CO₂ Diffusion in MOF Pores</text>
+    <text x="72" y="660" font-size="24" opacity=".8">Replace with your MOF structure / diffusion visualization</text>
+  </g>
+</svg>
