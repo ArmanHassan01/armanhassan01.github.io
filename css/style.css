@@ -30,4 +30,236 @@
 @media (max-width:1020px){.hero{grid-template-columns:1fr .72fr;gap:36px}.hero-copy h1{font-size:4.4rem}.interest-grid{grid-template-columns:1fr 1fr}.interest-card.support{grid-column:span 2}.project-grid{grid-template-columns:1fr 1fr}.skills-grid{grid-template-columns:repeat(3,1fr)}.bridge-box{padding:44px}.bridge-stages{grid-template-columns:1fr}.bridge-arrow{transform:rotate(90deg)}.publication{grid-template-columns:46px 1fr}.publication-action{grid-column:2;align-items:flex-start}.experience-grid{gap:28px}.education-card{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr}.contact-card{grid-template-columns:1fr}}
 @media (max-width:760px){.container{width:min(100% - 26px,var(--max))}.section{padding:68px 0}.nav-inner{height:68px}.nav-actions{display:none}.menu-toggle{display:block}.nav-links{position:absolute;left:13px;right:13px;top:72px;display:none;flex-direction:column;align-items:stretch;background:#fff;padding:18px;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.nav-links.open{display:flex}.hero{grid-template-columns:1fr;padding-top:48px;min-height:0}.hero-copy h1{font-size:3.3rem}.hero-visual{order:-1}.portrait-shell{max-width:310px;margin:auto}.portrait-caption{left:-4px;right:-4px;bottom:-24px;max-width:none}.stats{grid-template-columns:repeat(2,1fr)}.stat{border-bottom:1px solid var(--line)}.stat:nth-child(even){border-right:0}.section-head{grid-template-columns:1fr;gap:4px}.section-index{display:none}.interest-grid{grid-template-columns:1fr}.interest-card.support{grid-column:auto}.research-card,.research-card:nth-child(even){grid-template-columns:1fr}.research-card:nth-child(even) .research-image-wrap{order:0}.research-image-wrap{min-height:260px}.research-content{padding:26px}.workflow{align-items:flex-start}.publication{grid-template-columns:1fr}.publication-number{display:none}.publication-action{grid-column:auto}.bridge-box{padding:30px 22px}.project-grid{grid-template-columns:1fr}.project-featured{grid-column:auto}.experience-grid{grid-template-columns:1fr}.education-metrics{grid-template-columns:1fr}.skills-grid{grid-template-columns:1fr 1fr}.honors-strip{grid-template-columns:1fr}.honors-strip div{border-right:0;border-bottom:1px solid var(--line)}.contact-card{padding:30px 22px}.contact-card h2{font-size:2.25rem}.footer-inner{grid-template-columns:1fr}.footer-links{flex-wrap:wrap}}
 @media (max-width:480px){.hero-copy h1{font-size:2.85rem}.skills-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.stat{border-right:0}.hero-actions{align-items:stretch}.hero-actions .btn{width:100%}.text-link{text-align:center}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.project-card,.research-image{transition:none}}
+
+
+/* ==========================================================
+   SUBTLE PORTFOLIO ANIMATIONS
+   Academic, restrained, and disabled for reduced motion.
+   ========================================================== */
+
+/* A little depth when the sticky navigation separates from the page */
+.nav{
+  transition:background-color .28s ease,border-color .28s ease,box-shadow .28s ease;
+}
+.nav.nav-scrolled{
+  background:rgba(246,248,251,.94);
+  border-bottom-color:rgba(192,207,219,.9);
+  box-shadow:0 10px 30px rgba(16,32,51,.055);
+}
+
+/* Animated navigation underline */
+.nav-links a{
+  position:relative;
+  transition:color .2s ease;
+}
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-8px;
+  height:2px;
+  border-radius:999px;
+  background:var(--cyan);
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform .22s ease;
+}
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after{
+  transform:scaleX(1);
+}
+
+/* Hero entrance is slightly more directional than the standard reveal */
+.hero-copy.reveal{
+  transform:translate3d(-18px,20px,0);
+}
+.hero-visual.reveal{
+  transform:translate3d(22px,14px,0) scale(.985);
+}
+.hero-copy.reveal.visible,
+.hero-visual.reveal.visible{
+  transform:translate3d(0,0,0) scale(1);
+}
+
+/* Slow technical background motion */
+.lattice-a{animation:latticeFloatA 8s ease-in-out infinite;}
+.lattice-b{animation:latticeFloatB 10s ease-in-out infinite;}
+@keyframes latticeFloatA{
+  0%,100%{transform:translate3d(0,0,0) rotate(0deg)}
+  50%{transform:translate3d(-7px,9px,0) rotate(2deg)}
+}
+@keyframes latticeFloatB{
+  0%,100%{transform:translate3d(0,0,0) rotate(18deg)}
+  50%{transform:translate3d(8px,-7px,0) rotate(16deg)}
+}
+
+/* Tiny pulse for active/research status — deliberately slow */
+.phd-chip span,
+.status-dot{
+  position:relative;
+  box-shadow:0 0 0 0 rgba(40,164,191,.34);
+  animation:statusPulse 2.8s ease-out infinite;
+}
+@keyframes statusPulse{
+  0%{box-shadow:0 0 0 0 rgba(40,164,191,.34)}
+  55%,100%{box-shadow:0 0 0 8px rgba(40,164,191,0)}
+}
+
+/* Staggered scroll entrance. JS supplies --reveal-delay. */
+.reveal{
+  opacity:0;
+  transform:translate3d(0,22px,0) scale(.992);
+  filter:blur(2px);
+  transition:
+    opacity .62s cubic-bezier(.2,.7,.2,1),
+    transform .62s cubic-bezier(.2,.7,.2,1),
+    filter .62s ease;
+  transition-delay:var(--reveal-delay,0ms);
+  will-change:opacity,transform;
+}
+.reveal.visible{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+}
+
+/* Academic metric entrance and gentle hover */
+.stat{
+  opacity:0;
+  transform:translateY(10px);
+  transition:
+    opacity .5s ease,
+    transform .5s cubic-bezier(.2,.7,.2,1),
+    background-color .2s ease;
+  transition-delay:var(--stat-delay,0ms);
+}
+.stats.stats-ready .stat{
+  opacity:1;
+  transform:none;
+}
+.stat:hover{background:#f8fbfd;}
+.stat strong{transition:transform .2s ease,color .2s ease;}
+.stat:hover strong{transform:translateY(-2px);color:var(--blue);}
+
+/* Cards get tactile depth without looking like a startup dashboard */
+.interest-card,
+.research-card,
+.bridge-stage,
+.skill-card,
+.education-card,
+.contact-card{
+  transition:
+    transform .28s cubic-bezier(.2,.7,.2,1),
+    box-shadow .28s ease,
+    border-color .28s ease;
+}
+.interest-card:hover,
+.skill-card:hover{
+  transform:translateY(-5px);
+  border-color:#c8d8e4;
+  box-shadow:0 16px 38px rgba(16,32,51,.07);
+}
+.interest-card.primary:hover{
+  border-color:#16465e;
+  box-shadow:0 20px 46px rgba(7,26,47,.18);
+}
+.research-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 22px 52px rgba(16,32,51,.085);
+  border-color:#ccdce7;
+}
+.bridge-stage:hover{
+  transform:translateY(-4px);
+  border-color:rgba(112,200,216,.38);
+  background:rgba(255,255,255,.055);
+}
+.education-card:hover,
+.contact-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 22px 58px rgba(16,32,51,.09);
+}
+
+/* Images ease forward on hover */
+.research-image{transition:transform .65s cubic-bezier(.2,.7,.2,1),filter .35s ease;}
+.research-card:hover .research-image{transform:scale(1.035);filter:saturate(1.04);}
+.project-image{transition:transform .45s cubic-bezier(.2,.7,.2,1),filter .3s ease;}
+.project-card:hover .project-image{transform:scale(1.04);filter:saturate(1.03);}
+
+/* Tags react very lightly */
+.tag{
+  transition:transform .18s ease,border-color .18s ease,background-color .18s ease;
+}
+.tag:hover{
+  transform:translateY(-1px);
+  border-color:#bad6e0;
+  background:#f0f8fa;
+}
+.interest-card.primary .tag:hover{background:rgba(255,255,255,.13);}
+
+/* Buttons: lift plus a restrained moving highlight */
+.btn,
+.nav-btn{
+  position:relative;
+  overflow:hidden;
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background-color .2s ease;
+}
+.btn::after,
+.nav-btn::after{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-55%;
+  width:35%;
+  height:180%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  transform:skewX(-18deg);
+  transition:left .48s ease;
+  pointer-events:none;
+}
+.btn:hover::after,
+.nav-btn:hover::after{left:125%;}
+.btn:hover,
+.nav-btn:hover{transform:translateY(-2px);}
+
+/* Social buttons feel responsive */
+.social-link{
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,color .2s ease;
+}
+.social-link:hover{
+  transform:translateY(-3px) scale(1.04);
+  border-color:#b8d5df;
+  color:var(--blue);
+  box-shadow:0 8px 22px rgba(16,32,51,.08);
+}
+
+/* Workflow receives a very subtle moving cue */
+.workflow-arrow{
+  animation:arrowNudge 2.4s ease-in-out infinite;
+}
+.workflow-arrow:nth-of-type(2){animation-delay:.12s;}
+.workflow-arrow:nth-of-type(4){animation-delay:.24s;}
+@keyframes arrowNudge{
+  0%,100%{transform:translateX(0);opacity:.7}
+  50%{transform:translateX(3px);opacity:1}
+}
+
+/* Timeline dots activate on hover */
+.timeline-dot{transition:transform .2s ease,box-shadow .2s ease;}
+.timeline-item:hover .timeline-dot{
+  transform:scale(1.25);
+  box-shadow:0 0 0 6px rgba(40,164,191,.12);
+}
+
+/* Better keyboard focus while keeping the aesthetic clean */
+a:focus-visible,
+button:focus-visible{
+  outline:3px solid rgba(40,164,191,.28);
+  outline-offset:4px;
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal,.hero-copy.reveal,.hero-visual.reveal,.stat{opacity:1!important;transform:none!important;filter:none!important}
+}
