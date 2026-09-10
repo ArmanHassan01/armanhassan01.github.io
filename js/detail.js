@@ -1,3 +1,4 @@
+/* PROFESSIONAL NO-NUMBERING DETAIL BUILD: 20260910-professional-no-numbers */
 /* DETAIL PAGE BUILD: 20260910-final2 */
 (function () {
   const d = window.portfolioData;
@@ -12,15 +13,6 @@
   const collection = type === 'research' ? d.researchProjects : d.engineeringProjects;
   const item = collection.find(x => x.id === id);
 
-  // Keep detail-page numbering synchronized with the homepage order.
-  const featuredIds = type === 'research' ? d.site.featuredResearch : d.site.featuredProjects;
-  const orderedCollection = [
-    ...featuredIds.map(itemId => collection.find(x => x.id === itemId)).filter(Boolean),
-    ...collection.filter(x => !featuredIds.includes(x.id))
-  ];
-  const itemIndex = orderedCollection.findIndex(x => x && x.id === id);
-  const parentSection = type === 'research' ? '02' : '05';
-  const pageCode = `${parentSection}.${itemIndex >= 0 ? itemIndex + 1 : 0}`;
 
   if (!item) {
     document.title = `Not found | ${d.personal.shortName}`;
@@ -42,11 +34,8 @@
     ? `${esc(item.type || '')}${item.status ? ` · ${esc(item.status)}` : ''}`
     : `${esc(item.category || '')}${item.role ? ` · ${esc(item.role)}` : ''}`;
 
-  let detailBlockCounter = 0;
-  const nextDetailCode = () => `D${String(++detailBlockCounter).padStart(2, '0')}`;
   const detailBlock = (title, body, microLabel = '') => {
-    const code = nextDetailCode();
-    return `<section class="detail-section numbered-detail-section"><div class="detail-block-index">${code}</div>${microLabel ? `<p class="micro-label">${esc(microLabel)}</p>` : ''}<h2>${esc(title)}</h2>${body}</section>`;
+    return `<section class="detail-section clean-detail-section">${microLabel ? `<p class="micro-label">${esc(microLabel)}</p>` : ''}<h2>${esc(title)}</h2>${body}</section>`;
   };
 
   const renderSubprojectGallery = (sub) => {
@@ -76,19 +65,19 @@
     <section class="subprojects-section" id="subsystems">
       <div class="container">
         <div class="detail-section-heading subprojects-heading">
-          <p class="eyebrow">Rover R&D · ${esc(pageCode)}</p>
+          <p class="eyebrow">Rover R&D</p>
           <h2>Mechanical Subsystems</h2>
           <p>These are individual R&D efforts within the larger Team Interplanetar rover program. Use the links below to jump directly to a subsystem.</p>
         </div>
 
         <nav class="subproject-jump-nav" aria-label="Interplanetar subsystem navigation">
-          ${subprojects.map((sub, index) => `<a href="#${esc(sub.id)}"><span>${esc(`${pageCode}.${index + 1}`)}</span>${esc(sub.title)}</a>`).join('')}
+          ${subprojects.map(sub => `<a href="#${esc(sub.id)}">${esc(sub.title)}</a>`).join('')}
         </nav>
 
         <div class="subproject-list">
           ${subprojects.map((sub, index) => `
             <article class="subproject-case" id="${esc(sub.id)}">
-              <div class="subproject-number">${esc(`${pageCode}.${index + 1}`)}</div>
+              <div class="subproject-number">Subsystem</div>
               <div class="subproject-copy">
                 <p class="micro-label">${esc(sub.role || 'R&D')}</p>
                 <h3>${esc(sub.title)}</h3>
@@ -109,7 +98,7 @@
       <div class="container detail-hero-grid">
         <div class="detail-hero-copy reveal visible">
           <a class="detail-back" href="index.html#${type === 'research' ? 'research' : 'projects'}">← Back to ${type === 'research' ? 'research' : 'projects'}</a>
-          <p class="eyebrow detail-page-label"><span class="detail-page-code">${esc(pageCode)}</span>${type === 'research' ? 'Research case study' : 'Engineering case study'}</p>
+          <p class="eyebrow detail-page-label">${type === 'research' ? 'Research case study' : 'Engineering case study'}</p>
           <h1>${esc(item.title)}</h1>
           <p class="detail-meta">${meta}</p>
           ${type === 'research' && item.institution ? `<p class="institution">${esc(item.institution)}</p>` : ''}
@@ -143,9 +132,9 @@
 
     ${subprojectMarkup}
 
-    ${gallery.length ? `<section class="container detail-gallery-section"><div class="detail-section-heading"><p class="eyebrow"><span class="media-index">MEDIA 01</span>${subprojects.length ? 'Program overview' : 'Visuals'}</p><h2>${subprojects.length ? 'Selected Rover Visuals' : 'Gallery'}</h2><p>Click any image to view it at full size.</p></div><div class="detail-gallery">${gallery.map((g, i) => `<button class="gallery-item gallery-trigger" data-gallery-index="${i}" aria-label="Open ${esc(g.caption || g.alt || item.title)}"><img src="${esc(g.src)}" alt="${esc(g.alt || g.caption || item.title)}"><span>${esc(g.caption || '')}</span></button>`).join('')}</div></section>` : ''}
+    ${gallery.length ? `<section class="container detail-gallery-section"><div class="detail-section-heading"><p class="eyebrow">${subprojects.length ? 'Program overview' : 'Visuals'}</p><h2>${subprojects.length ? 'Selected Rover Visuals' : 'Gallery'}</h2><p>Click any image to view it at full size.</p></div><div class="detail-gallery">${gallery.map((g, i) => `<button class="gallery-item gallery-trigger" data-gallery-index="${i}" aria-label="Open ${esc(g.caption || g.alt || item.title)}"><img src="${esc(g.src)}" alt="${esc(g.alt || g.caption || item.title)}"><span>${esc(g.caption || '')}</span></button>`).join('')}</div></section>` : ''}
 
-    ${videos.length ? `<section class="section section-alt"><div class="container"><div class="detail-section-heading"><p class="eyebrow"><span class="media-index">MEDIA 02</span>Motion</p><h2>Video</h2></div><div class="video-grid">${videos.map(v => v.embed ? `<article class="video-card"><div class="video-frame"><iframe src="${esc(v.embed)}" title="${esc(v.title || item.title)}" loading="lazy" allowfullscreen></iframe></div><h3>${esc(v.title || '')}</h3><p>${esc(v.caption || '')}</p></article>` : `<article class="video-card"><video controls preload="metadata" ${v.poster ? `poster="${esc(v.poster)}"` : ''}><source src="${esc(v.src)}" type="video/mp4">Your browser does not support HTML video.</video><h3>${esc(v.title || '')}</h3><p>${esc(v.caption || '')}</p></article>`).join('')}</div></div></section>` : ''}
+    ${videos.length ? `<section class="section section-alt"><div class="container"><div class="detail-section-heading"><p class="eyebrow">Motion</p><h2>Video</h2></div><div class="video-grid">${videos.map(v => v.embed ? `<article class="video-card"><div class="video-frame"><iframe src="${esc(v.embed)}" title="${esc(v.title || item.title)}" loading="lazy" allowfullscreen></iframe></div><h3>${esc(v.title || '')}</h3><p>${esc(v.caption || '')}</p></article>` : `<article class="video-card"><video controls preload="metadata" ${v.poster ? `poster="${esc(v.poster)}"` : ''}><source src="${esc(v.src)}" type="video/mp4">Your browser does not support HTML video.</video><h3>${esc(v.title || '')}</h3><p>${esc(v.caption || '')}</p></article>`).join('')}</div></div></section>` : ''}
 
     <section class="container detail-next"><div><p class="eyebrow">Continue exploring</p><h2>Return to the full portfolio</h2></div><a class="btn btn-primary" href="index.html#${type === 'research' ? 'research' : 'projects'}">Back to ${type === 'research' ? 'research' : 'projects'}</a></section>
   `;

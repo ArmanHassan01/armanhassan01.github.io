@@ -1,3 +1,5 @@
+/* STRONG SECTION TRANSITION STYLE BUILD: 20260910-section-transitions-v2 */
+/* PROFESSIONAL NO-NUMBERING STYLE BUILD: 20260910-professional-no-numbers */
 /* PORTFOLIO STYLE BUILD: 20260910-final2 */
 :root {
   --bg: #f6f8fb;
@@ -1400,5 +1402,440 @@ body.detail-page-ready .detail-root{
 @media (prefers-reduced-motion:reduce){
   .portfolio-section.section-active > .container{
     animation:none!important;
+  }
+}
+
+
+/* ==========================================================
+   PROFESSIONAL SECTION HIERARCHY — NO VISIBLE NUMBERING
+   ========================================================== */
+
+/* Major headings use a slim animated rail instead of SECTION 03 badges */
+.section-head{
+  grid-template-columns:18px minmax(0,820px) !important;
+  gap:28px !important;
+  align-items:start;
+}
+
+.section-index,
+.item-index,
+.card-number,
+.publication-number,
+.subsection-index,
+.detail-page-code,
+.detail-block-index,
+.media-index{
+  display:none !important;
+}
+
+.section-marker{
+  display:block;
+  width:3px;
+  height:58px;
+  margin-top:4px;
+  border-radius:999px;
+  background:linear-gradient(180deg,var(--cyan),rgba(40,164,191,.12));
+  transform:scaleY(.25);
+  transform-origin:top;
+  opacity:.45;
+  transition:
+    transform .75s cubic-bezier(.2,.75,.2,1),
+    opacity .45s ease;
+}
+
+.section-head.visible .section-marker,
+.portfolio-section.section-active .section-marker{
+  transform:scaleY(1);
+  opacity:1;
+}
+
+/* Section backgrounds remain subtly different but never loud */
+.section-tone-1{ --section-bg:#f9fbfc; }
+.section-tone-2{ --section-bg:#f2f6f8; }
+.section-tone-3{ --section-bg:#f7f8f8; }
+
+.portfolio-section{
+  border-top:1px solid rgba(196,211,221,.6);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+/* Animated transition line between sections */
+.portfolio-section::after{
+  height:1px !important;
+  opacity:.08 !important;
+}
+.portfolio-section.section-active::after{
+  opacity:.72 !important;
+}
+
+/* Publication layout no longer reserves a whole column for item numbers */
+.publication{
+  grid-template-columns:minmax(0,1fr) minmax(235px,270px) !important;
+  gap:34px !important;
+}
+
+.publication-main{
+  min-width:0;
+}
+
+/* Keep the DOI pill exactly as the successful version */
+.publication-action{
+  grid-column:auto !important;
+  align-self:start;
+}
+
+/* Subsection headings: simple professional accent */
+.subsection-heading,
+.experience-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.subsection-accent{
+  display:inline-block;
+  flex:0 0 auto;
+  width:20px;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--cyan),#9bc8d3);
+}
+
+.inline-accent{
+  margin-right:8px;
+  vertical-align:middle;
+}
+
+/* Research-method flow uses dots, not pseudo-numbering */
+.workflow-step .workflow-dot{
+  width:8px;
+  min-width:8px;
+  height:8px;
+  border-radius:50%;
+  padding:0;
+  background:var(--cyan);
+  box-shadow:0 0 0 5px rgba(48,172,195,.10);
+}
+
+/* Research trajectory stages use a restrained geometric symbol */
+.bridge-icon{
+  width:38px !important;
+  min-width:38px !important;
+  height:38px;
+  padding:0 !important;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.55rem !important;
+  color:var(--cyan);
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(130,207,221,.25);
+}
+
+/* Secondary pages: no coding-style D01 / MEDIA 01 labels */
+.clean-detail-section{
+  position:relative;
+}
+.clean-detail-section::before{
+  content:"";
+  display:block;
+  width:34px;
+  height:2px;
+  margin-bottom:18px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--cyan),transparent);
+}
+
+.subproject-number{
+  width:auto !important;
+  min-width:0 !important;
+  height:auto !important;
+  padding:6px 9px !important;
+  border-radius:999px !important;
+  background:#eef6f8 !important;
+  color:#527587 !important;
+  font-family:inherit !important;
+  font-size:.58rem !important;
+  font-weight:850 !important;
+  text-transform:uppercase;
+  letter-spacing:.1em !important;
+  transform:none !important;
+}
+
+.subproject-case:hover .subproject-number{
+  transform:none !important;
+  background:#e8f3f6 !important;
+}
+
+/* On mobile, keep section headings elegant and compact */
+@media (max-width:760px){
+  .section-head{
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+
+  .section-marker{
+    width:54px;
+    height:3px;
+    margin:0 0 4px;
+    transform:scaleX(.3);
+    transform-origin:left;
+  }
+
+  .section-head.visible .section-marker,
+  .portfolio-section.section-active .section-marker{
+    transform:scaleX(1);
+  }
+
+  .publication{
+    grid-template-columns:1fr !important;
+    gap:18px !important;
+  }
+
+  .publication-action{
+    width:100%;
+  }
+
+  .doi-pill{
+    width:100%;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .section-marker{
+    transform:none !important;
+    transition:none !important;
+  }
+}
+
+
+/* ==========================================================
+   STRONGER SECTION DISTINCTION + SECTION-TO-SECTION MOTION
+   Clear enough to notice, restrained enough for PhD outreach.
+   ========================================================== */
+
+/* More legible differences between adjacent section surfaces */
+.section-tone-1{
+  --section-bg:#fbfcfd !important;
+  --section-accent:#2ea5bd;
+  --section-accent-soft:rgba(46,165,189,.13);
+}
+.section-tone-2{
+  --section-bg:#edf4f7 !important;
+  --section-accent:#1f7898;
+  --section-accent-soft:rgba(31,120,152,.12);
+}
+.section-tone-3{
+  --section-bg:#f5f7fa !important;
+  --section-accent:#516f86;
+  --section-accent-soft:rgba(81,111,134,.10);
+}
+
+.portfolio-section{
+  position:relative;
+  isolation:isolate;
+  background:var(--section-bg) !important;
+  border-top:1px solid rgba(177,197,210,.72) !important;
+  border-bottom:1px solid rgba(255,255,255,.88);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.8),
+    inset 0 -1px 0 rgba(183,202,214,.18);
+  transition:
+    background-color .55s ease,
+    box-shadow .55s ease;
+}
+
+/* Soft "chapter wash" that visibly sweeps into each section */
+.portfolio-section::before{
+  content:"" !important;
+  position:absolute !important;
+  z-index:0 !important;
+  inset:0 !important;
+  width:auto !important;
+  height:auto !important;
+  border-radius:0 !important;
+  opacity:0 !important;
+  transform:translateX(-28%) !important;
+  background:
+    linear-gradient(
+      100deg,
+      transparent 0%,
+      var(--section-accent-soft) 28%,
+      rgba(255,255,255,.24) 48%,
+      transparent 72%
+    ) !important;
+  pointer-events:none;
+}
+
+/* Stronger top transition rule; it draws in when the section arrives */
+.portfolio-section::after{
+  content:"" !important;
+  position:absolute !important;
+  z-index:3 !important;
+  top:-1px !important;
+  left:50% !important;
+  width:min(var(--max),calc(100% - 40px)) !important;
+  height:2px !important;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--section-accent) 20%,
+      rgba(92,191,207,.32) 54%,
+      transparent 100%
+    ) !important;
+  transform:translateX(-50%) scaleX(.06) !important;
+  transform-origin:left center !important;
+  opacity:.14 !important;
+  pointer-events:none;
+}
+
+/* Only engage the more obvious entrance animation when JS is working. */
+.section-motion-ready .portfolio-section > .container{
+  opacity:.26;
+  transform:translateY(30px);
+  filter:blur(3px);
+  transition:
+    opacity .72s ease,
+    transform .78s cubic-bezier(.2,.75,.2,1),
+    filter .64s ease;
+}
+
+.section-motion-ready .portfolio-section.section-active > .container{
+  opacity:1;
+  transform:translateY(0);
+  filter:blur(0);
+}
+
+/* Stagger the two containers in the Toolkit/Honors chapter */
+.section-motion-ready .portfolio-section.section-active > .container + .container{
+  transition-delay:.11s;
+}
+
+/* The wash makes the "handoff" from one chapter to the next noticeable. */
+.portfolio-section.section-active::before{
+  animation:sectionChapterWash .95s cubic-bezier(.22,.72,.22,1) both;
+}
+
+.portfolio-section.section-active::after{
+  animation:sectionRuleDraw .92s cubic-bezier(.2,.75,.2,1) both;
+}
+
+/* While a chapter is centered in the viewport, make its boundary slightly clearer. */
+.portfolio-section.section-current{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -1px 0 rgba(156,187,202,.25),
+    0 18px 55px rgba(28,62,83,.028);
+}
+
+@keyframes sectionChapterWash{
+  0%{
+    opacity:0;
+    transform:translateX(-32%);
+  }
+  32%{
+    opacity:.78;
+  }
+  100%{
+    opacity:0;
+    transform:translateX(32%);
+  }
+}
+
+@keyframes sectionRuleDraw{
+  0%{
+    opacity:.12;
+    transform:translateX(-50%) scaleX(.06);
+  }
+  55%{
+    opacity:.95;
+  }
+  100%{
+    opacity:.72;
+    transform:translateX(-50%) scaleX(1);
+  }
+}
+
+/* Section heading has its own visible, editorial entrance */
+.section-motion-ready .portfolio-section .section-head{
+  opacity:.35;
+  transform:translateY(18px);
+  transition:
+    opacity .60s ease .06s,
+    transform .66s cubic-bezier(.2,.75,.2,1) .06s !important;
+}
+
+.section-motion-ready .portfolio-section.section-active .section-head{
+  opacity:1;
+  transform:translateY(0) !important;
+}
+
+/* Accent rail becomes more visible on entry */
+.section-marker{
+  background:
+    linear-gradient(
+      180deg,
+      var(--section-accent,var(--cyan)),
+      rgba(40,164,191,.12)
+    ) !important;
+  box-shadow:0 0 0 1px rgba(46,165,189,.035);
+}
+
+.portfolio-section.section-current .section-marker{
+  box-shadow:0 0 18px rgba(46,165,189,.16);
+}
+
+/* The large whitespace between chapters now reads as intentional separation */
+.portfolio-section{
+  padding-top:96px !important;
+  padding-bottom:96px !important;
+}
+
+.portfolio-section-contact{
+  padding-bottom:84px !important;
+}
+
+/* Mobile: preserve distinction, but reduce motion distance */
+@media (max-width:760px){
+  .portfolio-section{
+    padding-top:68px !important;
+    padding-bottom:68px !important;
+  }
+
+  .portfolio-section::after{
+    width:calc(100% - 28px) !important;
+  }
+
+  .section-motion-ready .portfolio-section > .container{
+    transform:translateY(20px);
+    filter:blur(2px);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion:reduce){
+  .section-motion-ready .portfolio-section > .container,
+  .section-motion-ready .portfolio-section .section-head{
+    opacity:1 !important;
+    transform:none !important;
+    filter:none !important;
+    transition:none !important;
+  }
+
+  .portfolio-section.section-active::before,
+  .portfolio-section.section-active::after{
+    animation:none !important;
+  }
+
+  .portfolio-section::before{
+    display:none !important;
+  }
+
+  .portfolio-section::after{
+    transform:translateX(-50%) scaleX(1) !important;
+    opacity:.45 !important;
   }
 }

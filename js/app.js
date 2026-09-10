@@ -1,3 +1,5 @@
+/* SECTION TRANSITION BUILD: 20260910-section-transitions-v2 */
+/* PROFESSIONAL NO-NUMBERING BUILD: 20260910-professional-no-numbers */
 /* PORTFOLIO UI BUILD: 20260910-final2 */
 (function () {
   const d = window.portfolioData;
@@ -10,7 +12,7 @@
   const $ = (sel) => document.querySelector(sel);
   const esc = (value = '') => String(value).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const tags = (items = [], limit) => (limit ? items.slice(0, limit) : items).map(x => `<span class="tag">${esc(x)}</span>`).join('');
-  const sectionMark = (n) => `<span class="section-index"><small>SECTION</small><strong>${esc(n)}</strong></span>`;
+  const sectionMark = () => `<span class="section-marker" aria-hidden="true"></span>`;
 
   function socialLinks() {
     const icons = { linkedin: 'in', googleScholar: 'G', github: '&lt;/&gt;', orcid: 'iD' };
@@ -49,7 +51,6 @@
       <div class="section-head reveal">${sectionMark('01')}<div><p class="eyebrow">Research direction</p><h2>Research Interests</h2><p>Material systems and mechanical architectures where composition, geometry, interfaces, and structure create useful thermal or robotic behavior.</p></div></div>
       <div class="interest-grid">${d.researchInterests.map((r, i) => `
         <article class="interest-card ${esc(r.emphasis)} reveal">
-          <div class="card-number"><span>${`01.${i + 1}`}</span></div>
           <p class="micro-label">${esc(r.label)}</p>
           <h3>${esc(r.title)}</h3>
           <p>${esc(r.description)}</p>
@@ -65,7 +66,6 @@
         <a class="research-card-compact reveal" href="research.html?id=${encodeURIComponent(r.id)}" data-research-id="${esc(r.id)}">
           <div class="research-card-media"><img src="${esc(r.image)}" alt="${esc(r.imageAlt || r.title)}"></div>
           <div class="research-card-body">
-            <div class="item-index">02.${i + 1}</div>
             <div class="project-meta"><span>${esc(r.type)}</span><span class="status-dot"></span><span>${esc(r.status)}</span></div>
             <h3>${esc(r.title)}</h3>
             <p>${esc(r.summary)}</p>
@@ -74,7 +74,7 @@
           </div>
         </a>`).join('')}</div>
       <div class="workflow reveal">
-        ${['Atomic Structure','Force Field / Validation','Equilibration','Molecular Dynamics','Analysis','Post-processing','Interpretation'].map((x, i, arr) => `<div class="workflow-step"><span>M${String(i+1).padStart(2,'0')}</span><strong>${x}</strong></div>${i < arr.length-1 ? '<div class="workflow-arrow">→</div>' : ''}`).join('')}
+        ${['Atomic Structure','Force Field / Validation','Equilibration','Molecular Dynamics','Analysis','Post-processing','Interpretation'].map((x, i, arr) => `<div class="workflow-step"><span class="workflow-dot" aria-hidden="true"></span><strong>${x}</strong></div>${i < arr.length-1 ? '<div class="workflow-arrow">→</div>' : ''}`).join('')}
       </div>`;
   }
 
@@ -83,7 +83,6 @@
       <div class="section-head reveal">${sectionMark('03')}<div><p class="eyebrow">Research output</p><h2>Publications</h2><p>Peer-reviewed and conference research contributions.</p></div></div>
       <div class="publication-list">${d.publications.map((p, i) => `
         <article class="publication reveal">
-          <div class="publication-number">03.${i + 1}</div>
           <div class="publication-main"><div class="publication-year">${esc(p.year)}</div><h3>${esc(p.title)}</h3><p class="authors">${esc(p.authors)}</p><p>${esc(p.venue)}</p><p class="contribution">${esc(p.contribution)}</p></div>
           <div class="publication-action">
             <a href="${esc(p.url)}" target="_blank" rel="noreferrer" class="doi-pill publication-link" data-title="${esc(p.title)}" aria-label="Open DOI ${esc(p.doi)}">
@@ -99,7 +98,7 @@
     $('#bridge').innerHTML = `
       <div class="section-head reveal">${sectionMark('04')}<div><p class="eyebrow">Research trajectory</p><h2>${esc(d.researchBridge.title)}</h2><p>${esc(d.researchBridge.text)}</p></div></div>
       <div class="bridge-box reveal">
-        <div class="bridge-stages">${d.researchBridge.stages.map((s, i) => `<div class="bridge-stage"><div class="bridge-icon">04.${i + 1}</div><h3>${esc(s.title)}</h3><ul>${s.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>${i < d.researchBridge.stages.length-1 ? '<div class="bridge-arrow">→</div>' : ''}`).join('')}</div>
+        <div class="bridge-stages">${d.researchBridge.stages.map((s, i) => `<div class="bridge-stage"><div class="bridge-icon" aria-hidden="true">◆</div><h3>${esc(s.title)}</h3><ul>${s.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>${i < d.researchBridge.stages.length-1 ? '<div class="bridge-arrow">→</div>' : ''}`).join('')}</div>
       </div>`;
   }
 
@@ -112,7 +111,7 @@
       <div class="project-grid compact-project-grid">${projects.map((p, i) => `
         <a class="project-card project-card-link reveal" href="project.html?id=${encodeURIComponent(p.id)}" data-project-id="${esc(p.id)}">
           <div class="project-image-wrap"><img src="${esc(p.image)}" alt="${esc(p.title)}" class="project-image"></div>
-          <div class="project-body"><div class="item-index">05.${i + 1}</div><p class="micro-label">${esc(p.category)}</p><h3>${esc(p.title)}</h3><p class="role">${esc(p.role)}</p><p class="project-summary">${esc(p.description)}</p><div class="tag-row">${tags(p.tags, 3)}</div><span class="explore-link">Explore project <b>→</b></span></div>
+          <div class="project-body"><p class="micro-label">${esc(p.category)}</p><h3>${esc(p.title)}</h3><p class="role">${esc(p.role)}</p><p class="project-summary">${esc(p.description)}</p><div class="tag-row">${tags(p.tags, 3)}</div><span class="explore-link">Explore project <b>→</b></span></div>
         </a>`).join('')}</div>`;
   }
 
@@ -120,20 +119,20 @@
     $('#experience').innerHTML = `
       <div class="section-head reveal">${sectionMark('06')}<div><p class="eyebrow">Experience</p><h2>Experience & Education</h2></div></div>
       <div class="experience-grid compact-experience">
-        <div><h3 class="experience-label"><span class="subsection-index">06.1</span>Professional Experience</h3>${d.professionalExperience.map(e => `<article class="timeline-item reveal"><span class="timeline-dot"></span><div><p class="period">${esc(e.period)}</p><h3>${esc(e.role)}</h3><p class="institution">${esc(e.organization)}</p><p>${esc(e.description)}</p></div></article>`).join('')}</div>
-        <div><h3 class="experience-label"><span class="subsection-index">06.2</span>Engineering Leadership</h3>${d.leadershipExperience.map(e => `<article class="timeline-item reveal"><span class="timeline-dot"></span><div><p class="period">${esc(e.period)}</p><h3>${esc(e.role)}</h3><p class="institution">${esc(e.organization)}</p><p>${esc(e.description)}</p></div></article>`).join('')}</div>
+        <div><h3 class="experience-label"><span class="subsection-accent" aria-hidden="true"></span>Professional Experience</h3>${d.professionalExperience.map(e => `<article class="timeline-item reveal"><span class="timeline-dot"></span><div><p class="period">${esc(e.period)}</p><h3>${esc(e.role)}</h3><p class="institution">${esc(e.organization)}</p><p>${esc(e.description)}</p></div></article>`).join('')}</div>
+        <div><h3 class="experience-label"><span class="subsection-accent" aria-hidden="true"></span>Engineering Leadership</h3>${d.leadershipExperience.map(e => `<article class="timeline-item reveal"><span class="timeline-dot"></span><div><p class="period">${esc(e.period)}</p><h3>${esc(e.role)}</h3><p class="institution">${esc(e.organization)}</p><p>${esc(e.description)}</p></div></article>`).join('')}</div>
       </div>
-      <article class="education-card reveal"><div><p class="eyebrow"><span class="subsection-index inline-index">06.3</span>Education</p><h3>${esc(d.education.degree)}</h3><p>${esc(d.education.institution)} · ${esc(d.education.graduation)}</p><p class="education-thesis"><strong>Thesis:</strong> ${esc(d.education.thesis)}</p></div><div class="education-metrics"><div><strong>${esc(d.education.cgpa)}</strong><span>CGPA</span></div><div><strong>${esc(d.education.rank)}</strong><span>Class Rank</span></div><div><strong>${esc(d.education.honors)}</strong><span>Academic Honor</span></div></div></article>`;
+      <article class="education-card reveal"><div><p class="eyebrow"><span class="subsection-accent inline-accent" aria-hidden="true"></span>Education</p><h3>${esc(d.education.degree)}</h3><p>${esc(d.education.institution)} · ${esc(d.education.graduation)}</p><p class="education-thesis"><strong>Thesis:</strong> ${esc(d.education.thesis)}</p></div><div class="education-metrics"><div><strong>${esc(d.education.cgpa)}</strong><span>CGPA</span></div><div><strong>${esc(d.education.rank)}</strong><span>Class Rank</span></div><div><strong>${esc(d.education.honors)}</strong><span>Academic Honor</span></div></div></article>`;
   }
 
   if (d.site.sections.skills) {
     $('#skills').innerHTML = `
       <div class="section-head reveal compact-heading">${sectionMark('07')}<div><p class="eyebrow">Capabilities</p><h2>Technical Toolkit & Honors</h2></div></div>
-      <div class="subsection-heading reveal"><span class="subsection-index">07.1</span><h3>Technical Toolkit</h3></div><div class="skills-grid compact-skills">${Object.entries(d.skills).map(([name, items]) => `<article class="skill-card reveal"><h3>${esc(name)}</h3><div class="skill-list">${items.map(x => `<span>${esc(x)}</span>`).join('')}</div></article>`).join('')}</div>`;
+      <div class="subsection-heading reveal"><span class="subsection-accent" aria-hidden="true"></span><h3>Technical Toolkit</h3></div><div class="skills-grid compact-skills">${Object.entries(d.skills).map(([name, items]) => `<article class="skill-card reveal"><h3>${esc(name)}</h3><div class="skill-list">${items.map(x => `<span>${esc(x)}</span>`).join('')}</div></article>`).join('')}</div>`;
   }
 
   if (d.site.sections.honors) {
-    $('#honors').innerHTML = `<div class="subsection-heading honors-heading reveal"><span class="subsection-index">07.2</span><h3>Selected Honors</h3></div><div class="honors-strip reveal">${d.honors.map(h => `<div><strong>${esc(h.title)}</strong><span>${esc(h.detail)}</span></div>`).join('')}</div>`;
+    $('#honors').innerHTML = `<div class="subsection-heading honors-heading reveal"><span class="subsection-accent" aria-hidden="true"></span><h3>Selected Honors</h3></div><div class="honors-strip reveal">${d.honors.map(h => `<div><strong>${esc(h.title)}</strong><span>${esc(h.detail)}</span></div>`).join('')}</div>`;
   }
 
   if (d.site.sections.about) {
@@ -250,21 +249,51 @@
     sectionMap.forEach(item => activeObserver.observe(item.target));
   }
 
-  /* Major section transition / visual handoff */
+  /* Major section transition / visual handoff
+     Progressive enhancement: the CSS only hides/animates sections
+     after this class is added, so content remains visible if JS fails. */
   const majorSections = [...document.querySelectorAll('.portfolio-section')];
   if (majorSections.length) {
+    document.documentElement.classList.add('section-motion-ready');
+
+    const activateSection = (section) => {
+      section.classList.add('section-active');
+      majorSections.forEach(other => {
+        other.classList.toggle('section-current', other === section);
+      });
+    };
+
     const sectionObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('section-active');
+          activateSection(entry.target);
+          // Entry animation only needs to run once.
+          sectionObserver.unobserve(entry.target);
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -16% 0px'
+      threshold: 0.07,
+      rootMargin: '0px 0px -10% 0px'
     });
 
     majorSections.forEach(section => sectionObserver.observe(section));
+
+    /* Keep a clear "current chapter" cue while scrolling. */
+    const currentObserver = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+      majorSections.forEach(section => {
+        section.classList.toggle('section-current', section === visible.target);
+      });
+    }, {
+      rootMargin: '-34% 0px -48% 0px',
+      threshold: [0.01, 0.12, 0.28]
+    });
+
+    majorSections.forEach(section => currentObserver.observe(section));
   }
 
   /* Count-up for the numeric part of academic stats */
