@@ -1,3 +1,4 @@
+/* PORTFOLIO STYLE BUILD: 20260910-final2 */
 :root {
   --bg: #f6f8fb;
   --surface: #ffffff;
@@ -1375,5 +1376,29 @@ body.detail-page-ready .detail-root{
   }
   .subproject-number{
     min-width:70px;
+  }
+}
+
+
+/* ==========================================================
+   FINAL VERIFIED SECTION HANDOFF
+   ========================================================== */
+.portfolio-section{
+  background-color:var(--section-bg);
+}
+.portfolio-section > .container{
+  position:relative;
+  z-index:1;
+}
+.portfolio-section.section-active > .container{
+  animation:verifiedSectionSettle .70s cubic-bezier(.2,.75,.2,1) both;
+}
+@keyframes verifiedSectionSettle{
+  from{opacity:.90;transform:translateY(9px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media (prefers-reduced-motion:reduce){
+  .portfolio-section.section-active > .container{
+    animation:none!important;
   }
 }

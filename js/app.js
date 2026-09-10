@@ -1,3 +1,4 @@
+/* PORTFOLIO UI BUILD: 20260910-final2 */
 (function () {
   const d = window.portfolioData;
   if (!d) throw new Error('portfolioData was not loaded.');
@@ -96,7 +97,7 @@
 
   if (d.site.sections.bridge) {
     $('#bridge').innerHTML = `
-      <div class="section-head reveal">${sectionMark('08')}<div><p class="eyebrow">Research trajectory</p><h2>${esc(d.researchBridge.title)}</h2><p>${esc(d.researchBridge.text)}</p></div></div>
+      <div class="section-head reveal">${sectionMark('04')}<div><p class="eyebrow">Research trajectory</p><h2>${esc(d.researchBridge.title)}</h2><p>${esc(d.researchBridge.text)}</p></div></div>
       <div class="bridge-box reveal">
         <div class="bridge-stages">${d.researchBridge.stages.map((s, i) => `<div class="bridge-stage"><div class="bridge-icon">04.${i + 1}</div><h3>${esc(s.title)}</h3><ul>${s.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>${i < d.researchBridge.stages.length-1 ? '<div class="bridge-arrow">→</div>' : ''}`).join('')}</div>
       </div>`;
@@ -107,7 +108,7 @@
   const projects = [...projectOrder, ...remaining];
   if (d.site.sections.projects) {
     $('#projects').innerHTML = `
-      <div class="section-head reveal">${sectionMark('04')}<div><p class="eyebrow">Mechanical systems</p><h2>Selected Engineering Projects</h2><p>Click a project to open its CAD, prototype photos, videos, design decisions, and supporting details.</p></div></div>
+      <div class="section-head reveal">${sectionMark('05')}<div><p class="eyebrow">Mechanical systems</p><h2>Selected Engineering Projects</h2><p>Click a project to open its CAD, prototype photos, videos, design decisions, and supporting details.</p></div></div>
       <div class="project-grid compact-project-grid">${projects.map((p, i) => `
         <a class="project-card project-card-link reveal" href="project.html?id=${encodeURIComponent(p.id)}" data-project-id="${esc(p.id)}">
           <div class="project-image-wrap"><img src="${esc(p.image)}" alt="${esc(p.title)}" class="project-image"></div>
@@ -117,7 +118,7 @@
 
   if (d.site.sections.experience) {
     $('#experience').innerHTML = `
-      <div class="section-head reveal">${sectionMark('05')}<div><p class="eyebrow">Experience</p><h2>Experience & Education</h2></div></div>
+      <div class="section-head reveal">${sectionMark('06')}<div><p class="eyebrow">Experience</p><h2>Experience & Education</h2></div></div>
       <div class="experience-grid compact-experience">
         <div><h3 class="experience-label"><span class="subsection-index">06.1</span>Professional Experience</h3>${d.professionalExperience.map(e => `<article class="timeline-item reveal"><span class="timeline-dot"></span><div><p class="period">${esc(e.period)}</p><h3>${esc(e.role)}</h3><p class="institution">${esc(e.organization)}</p><p>${esc(e.description)}</p></div></article>`).join('')}</div>
         <div><h3 class="experience-label"><span class="subsection-index">06.2</span>Engineering Leadership</h3>${d.leadershipExperience.map(e => `<article class="timeline-item reveal"><span class="timeline-dot"></span><div><p class="period">${esc(e.period)}</p><h3>${esc(e.role)}</h3><p class="institution">${esc(e.organization)}</p><p>${esc(e.description)}</p></div></article>`).join('')}</div>
@@ -127,7 +128,7 @@
 
   if (d.site.sections.skills) {
     $('#skills').innerHTML = `
-      <div class="section-head reveal compact-heading">${sectionMark('06')}<div><p class="eyebrow">Capabilities</p><h2>Technical Toolkit & Honors</h2></div></div>
+      <div class="section-head reveal compact-heading">${sectionMark('07')}<div><p class="eyebrow">Capabilities</p><h2>Technical Toolkit & Honors</h2></div></div>
       <div class="subsection-heading reveal"><span class="subsection-index">07.1</span><h3>Technical Toolkit</h3></div><div class="skills-grid compact-skills">${Object.entries(d.skills).map(([name, items]) => `<article class="skill-card reveal"><h3>${esc(name)}</h3><div class="skill-list">${items.map(x => `<span>${esc(x)}</span>`).join('')}</div></article>`).join('')}</div>`;
   }
 
@@ -136,7 +137,7 @@
   }
 
   if (d.site.sections.about) {
-    $('#about').innerHTML = `<div class="about-grid"><div class="section-head reveal">${sectionMark('07')}<div><p class="eyebrow">About</p><h2>Researcher + Mechanical Engineer</h2></div></div><p class="about-copy reveal">${esc(d.about)}</p></div>`;
+    $('#about').innerHTML = `<div class="about-grid"><div class="section-head reveal">${sectionMark('08')}<div><p class="eyebrow">About</p><h2>Researcher + Mechanical Engineer</h2></div></div><p class="about-copy reveal">${esc(d.about)}</p></div>`;
   }
 
   if (d.site.sections.contact) {

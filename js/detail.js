@@ -1,3 +1,4 @@
+/* DETAIL PAGE BUILD: 20260910-final2 */
 (function () {
   const d = window.portfolioData;
   if (!d) return;
