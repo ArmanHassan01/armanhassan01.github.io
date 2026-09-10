@@ -867,3 +867,513 @@ body.detail-page-ready .detail-root{
   body.page-leaving main,
   body.page-leaving footer{opacity:1!important;transform:none!important}
 }
+
+
+/* ==========================================================
+   SECTION POLISH
+   Visual separation + clearer hierarchy + smooth handoff
+   ========================================================== */
+
+.portfolio-section{
+  --section-bg:#f7f9fb;
+  --section-accent:rgba(40,164,191,.72);
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:var(--section-bg);
+  border-top:1px solid rgba(203,216,227,.72);
+  transition:background-color .55s ease;
+}
+
+/* soft alternating tones: intentionally close in value */
+.section-tone-1{
+  --section-bg:#f8fafc;
+  --section-accent:rgba(40,164,191,.72);
+}
+.section-tone-2{
+  --section-bg:#eef4f7;
+  --section-accent:rgba(30,123,153,.68);
+}
+.section-tone-3{
+  --section-bg:#f7f8f7;
+  --section-accent:rgba(82,130,149,.58);
+}
+
+/* Very subtle animated "handoff" line at the beginning of a section */
+.portfolio-section::after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  top:-1px;
+  left:50%;
+  width:min(var(--max),calc(100% - 40px));
+  height:2px;
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--section-accent) 18%,
+    rgba(40,164,191,.18) 62%,
+    transparent 100%
+  );
+  transform:translateX(-50%) scaleX(.08);
+  transform-origin:left center;
+  opacity:.12;
+  transition:
+    transform .9s cubic-bezier(.2,.75,.2,1),
+    opacity .55s ease;
+}
+.portfolio-section.section-active::after{
+  transform:translateX(-50%) scaleX(1);
+  opacity:.85;
+}
+
+/* A barely-there light field enters with the section */
+.portfolio-section::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:520px;
+  height:520px;
+  border-radius:50%;
+  right:-260px;
+  top:8%;
+  background:radial-gradient(circle,rgba(40,164,191,.055),transparent 67%);
+  opacity:0;
+  transform:translate3d(38px,18px,0) scale(.96);
+  transition:opacity .8s ease,transform 1s cubic-bezier(.2,.75,.2,1);
+  pointer-events:none;
+}
+.portfolio-section.section-active::before{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+}
+
+/* Section headings: main numbers should never resemble item numbers */
+.section-head{
+  grid-template-columns:76px minmax(0,760px);
+  align-items:start;
+}
+
+.section-index{
+  width:54px;
+  min-height:56px;
+  padding:9px 7px 8px;
+  border:1px solid #d6e1e9;
+  border-radius:14px;
+  background:rgba(255,255,255,.66);
+  box-shadow:0 8px 22px rgba(16,32,51,.035);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:var(--navy);
+}
+
+.section-index small{
+  display:block;
+  font-size:.46rem;
+  line-height:1;
+  letter-spacing:.11em;
+  color:#8396a8;
+  font-weight:800;
+}
+
+.section-index strong{
+  display:block;
+  margin-top:4px;
+  font-size:.86rem;
+  line-height:1;
+  letter-spacing:.04em;
+}
+
+/* Research-interest numbers are now clearly "paths" */
+.card-number{
+  font-size:.64rem;
+  letter-spacing:.12em;
+  font-weight:850;
+}
+
+/* ==========================================================
+   PUBLICATIONS — separate item numbering from section numbering
+   and keep DOI clean on desktop
+   ========================================================== */
+
+.publication{
+  grid-template-columns:72px minmax(0,1fr) minmax(235px,270px);
+  gap:26px;
+  align-items:start;
+}
+
+.publication-number{
+  display:inline-flex;
+  width:48px;
+  height:34px;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #d8e3ea;
+  border-radius:10px;
+  background:rgba(255,255,255,.72);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:#6f8496;
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.04em;
+}
+
+.publication-action{
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-start;
+  width:100%;
+}
+
+.doi-pill{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  min-height:43px;
+  padding:9px 11px;
+  border:1px solid #d7e2ea;
+  border-radius:12px;
+  background:rgba(255,255,255,.76);
+  color:var(--navy);
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background-color .2s ease;
+}
+
+.doi-pill:hover{
+  transform:translateY(-2px);
+  border-color:#a9cbd8;
+  background:#fff;
+  box-shadow:0 10px 24px rgba(16,32,51,.065);
+}
+
+.doi-label{
+  font-size:.67rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  color:var(--blue);
+}
+
+.doi-value{
+  min-width:0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.66rem;
+  color:#66798b;
+  white-space:nowrap;
+  text-align:right;
+}
+
+.doi-arrow{
+  font-size:.75rem;
+  color:var(--blue);
+}
+
+/* Main content subtly settles upward as its section activates */
+.portfolio-section .section-head{
+  transition:transform .7s cubic-bezier(.2,.75,.2,1);
+}
+.portfolio-section.section-active .section-head{
+  transform:translateY(-2px);
+}
+
+/* Keep honors visually attached to toolkit instead of looking like another chapter */
+#honors .honors-strip{
+  margin-top:44px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width:1020px){
+  .publication{
+    grid-template-columns:54px minmax(0,1fr);
+  }
+  .publication-action{
+    grid-column:2;
+    max-width:430px;
+    align-items:flex-start;
+  }
+  .doi-value{
+    text-align:left;
+  }
+}
+
+@media (max-width:760px){
+  .portfolio-section::after{
+    width:calc(100% - 26px);
+  }
+
+  .section-head{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  /* Keep a compact main-section marker on mobile instead of hiding it */
+  .section-index{
+    display:inline-flex;
+    width:max-content;
+    min-height:0;
+    padding:7px 10px;
+    flex-direction:row;
+    gap:6px;
+    border-radius:999px;
+  }
+
+  .section-index small{
+    font-size:.45rem;
+  }
+
+  .section-index strong{
+    margin:0;
+    font-size:.68rem;
+  }
+
+  .publication{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+
+  .publication-number{
+    display:inline-flex;
+  }
+
+  .publication-action{
+    grid-column:auto;
+    max-width:100%;
+  }
+
+  .doi-pill{
+    width:auto;
+    max-width:100%;
+  }
+
+  /* Long identifiers may wrap only on narrow screens, where it is necessary */
+  .doi-value{
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .portfolio-section::after{
+    transform:translateX(-50%) scaleX(1)!important;
+    opacity:.55!important;
+    transition:none!important;
+  }
+  .portfolio-section::before{
+    opacity:.55!important;
+    transform:none!important;
+    transition:none!important;
+  }
+}
+
+
+/* ==========================================================
+   CONSISTENT NUMBERING SYSTEM
+   Major sections: 01–09
+   Section items: 01.1, 02.1, ...
+   Workflow: M01, M02, ...
+   Detail-page content: D01, D02, ...
+   Media: MEDIA 01, MEDIA 02
+   ========================================================== */
+
+.item-index{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:max-content;
+  min-height:28px;
+  padding:5px 9px;
+  margin-bottom:10px;
+  border:1px solid #d4e1e9;
+  border-radius:8px;
+  background:rgba(255,255,255,.72);
+  color:#557185;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.66rem;
+  font-weight:850;
+  letter-spacing:.04em;
+}
+
+.card-number{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:#668094;
+}
+.card-number span{
+  display:inline-flex;
+  min-height:27px;
+  align-items:center;
+  padding:4px 8px;
+  border:1px solid #d7e3ea;
+  border-radius:8px;
+  background:rgba(255,255,255,.68);
+  font-size:.67rem;
+  letter-spacing:.03em;
+}
+
+.subsection-index{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  min-width:44px;
+  min-height:27px;
+  padding:4px 8px;
+  margin-right:9px;
+  border:1px solid #d5e2e9;
+  border-radius:8px;
+  background:rgba(255,255,255,.72);
+  color:#5e778a;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.64rem;
+  font-weight:850;
+  letter-spacing:.03em;
+}
+
+.inline-index{
+  margin-right:8px;
+  vertical-align:middle;
+}
+
+.subsection-heading{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  margin:30px 0 17px;
+}
+.subsection-heading h3{
+  margin:0;
+  color:var(--navy);
+  font-size:1rem;
+  letter-spacing:-.01em;
+}
+.honors-heading{
+  margin-top:44px;
+}
+
+.experience-label{
+  display:flex;
+  align-items:center;
+}
+
+/* Publications use the section hierarchy instead of an unrelated P01/P02 system */
+.publication-number{
+  width:auto;
+  min-width:52px;
+  padding-inline:9px;
+}
+
+/* Research workflow uses an explicit process namespace */
+.workflow-step span{
+  min-width:34px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.6rem;
+  letter-spacing:.04em;
+}
+
+/* Research-trajectory stages are children of Section 04 */
+.bridge-icon{
+  width:auto;
+  min-width:44px;
+  padding:0 8px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.64rem;
+  letter-spacing:.02em;
+}
+
+/* Detail / secondary page code */
+.detail-page-label{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+}
+.detail-page-code{
+  display:inline-flex;
+  align-items:center;
+  min-height:29px;
+  padding:5px 9px;
+  border:1px solid rgba(91,181,201,.38);
+  border-radius:8px;
+  background:rgba(255,255,255,.08);
+  color:inherit;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.7rem;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+
+.numbered-detail-section{
+  position:relative;
+  padding-top:44px;
+}
+.detail-block-index{
+  position:absolute;
+  top:8px;
+  left:0;
+  display:inline-flex;
+  min-height:25px;
+  align-items:center;
+  padding:4px 8px;
+  border:1px solid #d6e2e9;
+  border-radius:8px;
+  background:#f8fbfc;
+  color:#698194;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.61rem;
+  font-weight:850;
+  letter-spacing:.05em;
+}
+
+/* Grouped engineering subsystems show their full hierarchy: 05.2.1 etc. */
+.subproject-number{
+  width:auto;
+  min-width:64px;
+  padding:0 8px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.63rem;
+  letter-spacing:.02em;
+}
+.subproject-jump-nav a{
+  gap:7px;
+}
+.subproject-jump-nav a span{
+  color:#698295;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.61rem;
+  font-weight:850;
+}
+
+.media-index{
+  display:inline-flex;
+  margin-right:8px;
+  padding:4px 7px;
+  border:1px solid currentColor;
+  border-radius:7px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.55rem;
+  line-height:1;
+  letter-spacing:.05em;
+  opacity:.65;
+}
+
+@media (max-width:760px){
+  .experience-label{
+    align-items:flex-start;
+  }
+  .subsection-index{
+    min-width:42px;
+  }
+  .subproject-number{
+    min-width:70px;
+  }
+}
