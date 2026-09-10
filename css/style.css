@@ -1,3 +1,4 @@
+/* CLEAN BRIDGE ICON STYLE BUILD: 20260910-clean-bridge-icons-v1 */
 /* FINAL SECTION + BULLET POLISH BUILD: 20260910-alt-sections-clean-v1 */
 /* STRONG SECTION TRANSITION STYLE BUILD: 20260910-section-transitions-v2 */
 /* PROFESSIONAL NO-NUMBERING STYLE BUILD: 20260910-professional-no-numbers */
@@ -1996,5 +1997,61 @@ body.detail-page-ready .detail-root{
 
   .bridge-stage li::before{
     width:11px;
+  }
+}
+
+
+/* ==========================================================
+   CLEAN RESEARCH-TRAJECTORY CARDS
+   Remove decorative diamond/circle markers everywhere.
+   ========================================================== */
+
+.bridge-stage{
+  position:relative;
+  padding-top:30px !important;
+}
+
+/* Small technical accent instead of a decorative icon */
+.bridge-stage::before{
+  content:"";
+  position:absolute;
+  left:24px;
+  top:20px;
+  width:34px;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#63c8d8,#a4e4eb);
+  box-shadow:0 0 10px rgba(99,200,216,.15);
+  opacity:.9;
+  transform:scaleX(.72);
+  transform-origin:left;
+  transition:transform .24s ease,opacity .24s ease;
+}
+
+.bridge-stage:hover::before{
+  transform:scaleX(1);
+  opacity:1;
+}
+
+.bridge-stage h3{
+  margin-top:10px !important;
+}
+
+/* Retire all bridge-icon variants from earlier builds. */
+.bridge-icon{
+  display:none !important;
+}
+
+/* Keep the large faint background arc; it is a section-level
+   decorative element, not a repeated card icon. */
+
+@media (max-width:760px){
+  .bridge-stage{
+    padding-top:28px !important;
+  }
+  .bridge-stage::before{
+    left:20px;
+    top:18px;
+    width:30px;
   }
 }

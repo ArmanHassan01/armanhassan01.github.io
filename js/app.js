@@ -1,3 +1,4 @@
+/* CLEAN BRIDGE MARKERS BUILD: 20260910-clean-bridge-icons-v1 */
 /* CLEAN STRUCTURAL HIERARCHY BUILD: 20260910-alt-sections-clean-v1 */
 /* SECTION TRANSITION BUILD: 20260910-section-transitions-v2 */
 /* PROFESSIONAL NO-NUMBERING BUILD: 20260910-professional-no-numbers */
@@ -99,7 +100,7 @@
     $('#bridge').innerHTML = `
       <div class="section-head reveal">${sectionAccent()}<div><p class="eyebrow">Research trajectory</p><h2>${esc(d.researchBridge.title)}</h2><p>${esc(d.researchBridge.text)}</p></div></div>
       <div class="bridge-box reveal">
-        <div class="bridge-stages">${d.researchBridge.stages.map((s, i) => `<div class="bridge-stage"><div class="bridge-icon" aria-hidden="true">◆</div><h3>${esc(s.title)}</h3><ul>${s.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>${i < d.researchBridge.stages.length-1 ? '<div class="bridge-arrow">→</div>' : ''}`).join('')}</div>
+        <div class="bridge-stages">${d.researchBridge.stages.map((s, i) => `<div class="bridge-stage"><h3>${esc(s.title)}</h3><ul>${s.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>${i < d.researchBridge.stages.length-1 ? '<div class="bridge-arrow">→</div>' : ''}`).join('')}</div>
       </div>`;
   }
 
