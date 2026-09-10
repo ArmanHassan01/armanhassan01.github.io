@@ -254,3 +254,23 @@ The motion layer does not change any portfolio content. Normal content is still 
 `js/portfolio-data.js`
 
 If a visitor has “Reduce Motion” enabled, the site automatically removes the non-essential animations.
+
+
+---
+
+## Visual hierarchy in this build
+
+The public website intentionally does **not** use visible section numbers, subsection numbers,
+or project codes. Structural hierarchy is communicated through:
+
+- white / light-blue alternating section backgrounds
+- animated section dividers
+- typography and spacing
+- descriptive labels such as `Research output`, `Capabilities`, and `Subsystem`
+- accent rails and short rules
+
+Meaningful content numbers such as years, CGPA, class rank, DOI identifiers, and technical
+measurements are still shown normally.
+
+The `Where Materials Meet Mechanisms` lists use short cyan rule markers instead of ordinary
+round bullet points.

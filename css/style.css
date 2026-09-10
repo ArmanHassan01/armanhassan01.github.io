@@ -1,3 +1,4 @@
+/* FINAL SECTION + BULLET POLISH BUILD: 20260910-alt-sections-clean-v1 */
 /* STRONG SECTION TRANSITION STYLE BUILD: 20260910-section-transitions-v2 */
 /* PROFESSIONAL NO-NUMBERING STYLE BUILD: 20260910-professional-no-numbers */
 /* PORTFOLIO STYLE BUILD: 20260910-final2 */
@@ -1837,5 +1838,163 @@ body.detail-page-ready .detail-root{
   .portfolio-section::after{
     transform:translateX(-50%) scaleX(1) !important;
     opacity:.45 !important;
+  }
+}
+
+
+/* ==========================================================
+   FINAL ACADEMIC SECTION SYSTEM
+   White / light-blue alternation + no structural numbering
+   ========================================================== */
+
+.section-surface-white{
+  --section-bg:#ffffff;
+  --section-accent:#2da3ba;
+  --section-accent-soft:rgba(45,163,186,.10);
+}
+
+.section-surface-blue{
+  --section-bg:#edf6fa;
+  --section-accent:#257f9d;
+  --section-accent-soft:rgba(37,127,157,.11);
+}
+
+.portfolio-section{
+  background:var(--section-bg) !important;
+  border-top:1px solid rgba(172,196,209,.72) !important;
+  border-bottom:1px solid rgba(255,255,255,.94) !important;
+}
+
+/* Keep the section handoff visible but elegant. */
+.portfolio-section::after{
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--section-accent) 18%,
+      rgba(67,177,197,.40) 52%,
+      transparent 100%
+    ) !important;
+}
+
+/* Completely retire all legacy structural-number UI, everywhere. */
+.section-index,
+.item-index,
+.publication-number,
+.subsection-index,
+.detail-page-code,
+.detail-block-index,
+.media-index,
+.card-number,
+.legacy-number-hidden{
+  display:none !important;
+}
+
+/* ==========================================================
+   RESEARCH TRAJECTORY LISTS
+   Replace ordinary round bullets with clean technical rows.
+   ========================================================== */
+
+.bridge-stage ul{
+  list-style:none !important;
+  margin:16px 0 0 !important;
+  padding:0 !important;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  color:#afc5d1;
+}
+
+.bridge-stage li{
+  position:relative;
+  display:flex;
+  align-items:center;
+  min-height:34px;
+  padding:7px 0 7px 24px;
+  border-bottom:1px solid rgba(255,255,255,.065);
+  line-height:1.35;
+}
+
+.bridge-stage li:last-child{
+  border-bottom:0;
+}
+
+/* Short cyan technical rule instead of a generic bullet. */
+.bridge-stage li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  width:12px;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#63c8d8,#9be2ea);
+  box-shadow:0 0 8px rgba(99,200,216,.16);
+  transform:scaleX(.72);
+  transform-origin:left;
+  transition:transform .22s ease,opacity .22s ease;
+  opacity:.78;
+}
+
+.bridge-stage li:hover::before{
+  transform:scaleX(1);
+  opacity:1;
+}
+
+.bridge-stage li:hover{
+  color:#dcebf2;
+}
+
+/* Preserve the dark bridge as a deliberate visual anchor. */
+.bridge-box{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(61,169,194,.12),transparent 30%),
+    linear-gradient(145deg,#071a2f,#0b3549) !important;
+  box-shadow:0 28px 70px rgba(7,26,47,.16);
+}
+
+/* Slightly reduce the visual weight of the little diamond icon. */
+.bridge-icon{
+  width:36px !important;
+  min-width:36px !important;
+  height:36px !important;
+  background:rgba(255,255,255,.04) !important;
+  border-color:rgba(109,202,219,.20) !important;
+}
+
+/* ==========================================================
+   SUBSECTION LABELS
+   Descriptive text + accent line only, never numbering.
+   ========================================================== */
+
+.subsection-accent{
+  width:22px;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--cyan),rgba(45,163,186,.35));
+}
+
+/* Secondary-page blocks use whitespace/rules rather than D01/MEDIA labels. */
+.clean-detail-section::before,
+.numbered-detail-section::before{
+  content:"";
+  display:block;
+  width:36px;
+  height:2px;
+  margin-bottom:18px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--cyan),transparent);
+}
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+@media (max-width:760px){
+  .bridge-stage li{
+    min-height:32px;
+    padding-left:22px;
+  }
+
+  .bridge-stage li::before{
+    width:11px;
   }
 }

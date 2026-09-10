@@ -1,3 +1,4 @@
+/* CLEAN STRUCTURAL HIERARCHY BUILD: 20260910-alt-sections-clean-v1 */
 /* SECTION TRANSITION BUILD: 20260910-section-transitions-v2 */
 /* PROFESSIONAL NO-NUMBERING BUILD: 20260910-professional-no-numbers */
 /* PORTFOLIO UI BUILD: 20260910-final2 */
@@ -12,7 +13,7 @@
   const $ = (sel) => document.querySelector(sel);
   const esc = (value = '') => String(value).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const tags = (items = [], limit) => (limit ? items.slice(0, limit) : items).map(x => `<span class="tag">${esc(x)}</span>`).join('');
-  const sectionMark = () => `<span class="section-marker" aria-hidden="true"></span>`;
+  const sectionAccent = () => `<span class="section-marker" aria-hidden="true"></span>`;
 
   function socialLinks() {
     const icons = { linkedin: 'in', googleScholar: 'G', github: '&lt;/&gt;', orcid: 'iD' };
@@ -48,7 +49,7 @@
 
   if (d.site.sections.researchInterests) {
     $('#research-interests').innerHTML = `
-      <div class="section-head reveal">${sectionMark('01')}<div><p class="eyebrow">Research direction</p><h2>Research Interests</h2><p>Material systems and mechanical architectures where composition, geometry, interfaces, and structure create useful thermal or robotic behavior.</p></div></div>
+      <div class="section-head reveal">${sectionAccent()}<div><p class="eyebrow">Research direction</p><h2>Research Interests</h2><p>Material systems and mechanical architectures where composition, geometry, interfaces, and structure create useful thermal or robotic behavior.</p></div></div>
       <div class="interest-grid">${d.researchInterests.map((r, i) => `
         <article class="interest-card ${esc(r.emphasis)} reveal">
           <p class="micro-label">${esc(r.label)}</p>
@@ -61,7 +62,7 @@
   const researchOrder = d.site.featuredResearch.map(id => d.researchProjects.find(x => x.id === id)).filter(Boolean);
   if (d.site.sections.research) {
     $('#research').innerHTML = `
-      <div class="section-head reveal">${sectionMark('02')}<div><p class="eyebrow">Selected work</p><h2>Featured Research</h2><p>Scan the overview here, then open any case study for methodology, figures, results, and additional material.</p></div></div>
+      <div class="section-head reveal">${sectionAccent()}<div><p class="eyebrow">Selected work</p><h2>Featured Research</h2><p>Scan the overview here, then open any case study for methodology, figures, results, and additional material.</p></div></div>
       <div class="research-grid-compact">${researchOrder.map((r, i) => `
         <a class="research-card-compact reveal" href="research.html?id=${encodeURIComponent(r.id)}" data-research-id="${esc(r.id)}">
           <div class="research-card-media"><img src="${esc(r.image)}" alt="${esc(r.imageAlt || r.title)}"></div>
@@ -80,7 +81,7 @@
 
   if (d.site.sections.publications) {
     $('#publications').innerHTML = `
-      <div class="section-head reveal">${sectionMark('03')}<div><p class="eyebrow">Research output</p><h2>Publications</h2><p>Peer-reviewed and conference research contributions.</p></div></div>
+      <div class="section-head reveal">${sectionAccent()}<div><p class="eyebrow">Research output</p><h2>Publications</h2><p>Peer-reviewed and conference research contributions.</p></div></div>
       <div class="publication-list">${d.publications.map((p, i) => `
         <article class="publication reveal">
           <div class="publication-main"><div class="publication-year">${esc(p.year)}</div><h3>${esc(p.title)}</h3><p class="authors">${esc(p.authors)}</p><p>${esc(p.venue)}</p><p class="contribution">${esc(p.contribution)}</p></div>
@@ -96,7 +97,7 @@
 
   if (d.site.sections.bridge) {
     $('#bridge').innerHTML = `
-      <div class="section-head reveal">${sectionMark('04')}<div><p class="eyebrow">Research trajectory</p><h2>${esc(d.researchBridge.title)}</h2><p>${esc(d.researchBridge.text)}</p></div></div>
+      <div class="section-head reveal">${sectionAccent()}<div><p class="eyebrow">Research trajectory</p><h2>${esc(d.researchBridge.title)}</h2><p>${esc(d.researchBridge.text)}</p></div></div>
       <div class="bridge-box reveal">
         <div class="bridge-stages">${d.researchBridge.stages.map((s, i) => `<div class="bridge-stage"><div class="bridge-icon" aria-hidden="true">◆</div><h3>${esc(s.title)}</h3><ul>${s.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>${i < d.researchBridge.stages.length-1 ? '<div class="bridge-arrow">→</div>' : ''}`).join('')}</div>
       </div>`;
@@ -107,7 +108,7 @@
   const projects = [...projectOrder, ...remaining];
   if (d.site.sections.projects) {
     $('#projects').innerHTML = `
-      <div class="section-head reveal">${sectionMark('05')}<div><p class="eyebrow">Mechanical systems</p><h2>Selected Engineering Projects</h2><p>Click a project to open its CAD, prototype photos, videos, design decisions, and supporting details.</p></div></div>
+      <div class="section-head reveal">${sectionAccent()}<div><p class="eyebrow">Mechanical systems</p><h2>Selected Engineering Projects</h2><p>Click a project to open its CAD, prototype photos, videos, design decisions, and supporting details.</p></div></div>
       <div class="project-grid compact-project-grid">${projects.map((p, i) => `
         <a class="project-card project-card-link reveal" href="project.html?id=${encodeURIComponent(p.id)}" data-project-id="${esc(p.id)}">
           <div class="project-image-wrap"><img src="${esc(p.image)}" alt="${esc(p.title)}" class="project-image"></div>
@@ -117,7 +118,7 @@
 
   if (d.site.sections.experience) {
     $('#experience').innerHTML = `
-      <div class="section-head reveal">${sectionMark('06')}<div><p class="eyebrow">Experience</p><h2>Experience & Education</h2></div></div>
+      <div class="section-head reveal">${sectionAccent()}<div><p class="eyebrow">Experience</p><h2>Experience & Education</h2></div></div>
       <div class="experience-grid compact-experience">
         <div><h3 class="experience-label"><span class="subsection-accent" aria-hidden="true"></span>Professional Experience</h3>${d.professionalExperience.map(e => `<article class="timeline-item reveal"><span class="timeline-dot"></span><div><p class="period">${esc(e.period)}</p><h3>${esc(e.role)}</h3><p class="institution">${esc(e.organization)}</p><p>${esc(e.description)}</p></div></article>`).join('')}</div>
         <div><h3 class="experience-label"><span class="subsection-accent" aria-hidden="true"></span>Engineering Leadership</h3>${d.leadershipExperience.map(e => `<article class="timeline-item reveal"><span class="timeline-dot"></span><div><p class="period">${esc(e.period)}</p><h3>${esc(e.role)}</h3><p class="institution">${esc(e.organization)}</p><p>${esc(e.description)}</p></div></article>`).join('')}</div>
@@ -127,7 +128,7 @@
 
   if (d.site.sections.skills) {
     $('#skills').innerHTML = `
-      <div class="section-head reveal compact-heading">${sectionMark('07')}<div><p class="eyebrow">Capabilities</p><h2>Technical Toolkit & Honors</h2></div></div>
+      <div class="section-head reveal compact-heading">${sectionAccent()}<div><p class="eyebrow">Capabilities</p><h2>Technical Toolkit & Honors</h2></div></div>
       <div class="subsection-heading reveal"><span class="subsection-accent" aria-hidden="true"></span><h3>Technical Toolkit</h3></div><div class="skills-grid compact-skills">${Object.entries(d.skills).map(([name, items]) => `<article class="skill-card reveal"><h3>${esc(name)}</h3><div class="skill-list">${items.map(x => `<span>${esc(x)}</span>`).join('')}</div></article>`).join('')}</div>`;
   }
 
@@ -136,12 +137,12 @@
   }
 
   if (d.site.sections.about) {
-    $('#about').innerHTML = `<div class="about-grid"><div class="section-head reveal">${sectionMark('08')}<div><p class="eyebrow">About</p><h2>Researcher + Mechanical Engineer</h2></div></div><p class="about-copy reveal">${esc(d.about)}</p></div>`;
+    $('#about').innerHTML = `<div class="about-grid"><div class="section-head reveal">${sectionAccent()}<div><p class="eyebrow">About</p><h2>Researcher + Mechanical Engineer</h2></div></div><p class="about-copy reveal">${esc(d.about)}</p></div>`;
   }
 
   if (d.site.sections.contact) {
     $('#contact').innerHTML = `
-      <div class="section-head reveal compact-heading">${sectionMark('09')}<div><p class="eyebrow">Contact</p><h2>PhD Outreach & Contact</h2></div></div>
+      <div class="section-head reveal compact-heading">${sectionAccent()}<div><p class="eyebrow">Contact</p><h2>PhD Outreach & Contact</h2></div></div>
       <div class="contact-card reveal"><div><p class="eyebrow">Fall 2027</p><h2>${esc(d.contact.heading)}</h2><p>${esc(d.contact.text)}</p></div><div class="contact-actions"><a class="btn btn-primary email-link" data-location="contact" href="mailto:${esc(d.personal.email)}">Email Arman</a><a class="btn btn-secondary cv-link" data-location="contact" href="${esc(d.personal.cv)}" target="_blank">Download Academic CV</a><span>${esc(d.personal.email)}</span></div></div>`;
   }
 
